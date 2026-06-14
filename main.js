@@ -188,6 +188,35 @@ if (btnDownload) {
   });
 }
 
+const btnCopy = document.getElementById('btn-copy');
+const copyIcon = document.getElementById('copy-icon');
+const copyText = document.getElementById('copy-text');
+
+if (btnCopy) {
+  btnCopy.addEventListener('click', async () => {
+    try {
+      const content = editor.value;
+      await navigator.clipboard.writeText(content);
+      
+      // Visual feedback
+      copyIcon.textContent = 'check';
+      copyText.textContent = '완료!';
+      btnCopy.classList.replace('bg-primary', 'bg-green-600');
+      btnCopy.classList.replace('hover:bg-primary-container', 'hover:bg-green-700');
+      
+      setTimeout(() => {
+        copyIcon.textContent = 'content_copy';
+        copyText.textContent = '복사';
+        btnCopy.classList.replace('bg-green-600', 'bg-primary');
+        btnCopy.classList.replace('hover:bg-green-700', 'hover:bg-primary-container');
+      }, 2000);
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+      alert('클립보드 복사에 실패했습니다.');
+    }
+  });
+}
+
 // Basic toolbar integration (optional but nice)
 document.querySelectorAll('.group').forEach(btn => {
   btn.addEventListener('click', () => {
