@@ -265,7 +265,7 @@
 </div>
 </div>
 
-<div id="slash-menu" class="hidden absolute z-50 w-64 bg-white border border-outline-variant shadow-xl rounded-xl overflow-hidden flex flex-col py-2 font-body-ui" style="max-height: 320px; overflow-y: auto;">
+<div id="slash-menu" class="hidden absolute z-50 w-64 bg-white border border-outline-variant shadow-xl rounded-xl overflow-hidden flex flex-col py-2 font-body-ui custom-scrollbar" style="max-height: 360px; overflow-y: auto;">
   <div class="px-4 py-1 text-xs font-bold text-outline uppercase tracking-wider">기본 블록</div>
   <button class="slash-item text-left px-4 py-2 hover:bg-surface-container-low focus:bg-surface-container-low outline-none flex items-center gap-3 transition-colors" data-insert="\n# ">
     <span class="material-symbols-outlined text-outline">title</span>
@@ -298,6 +298,38 @@
   <button class="slash-item text-left px-4 py-2 hover:bg-surface-container-low focus:bg-surface-container-low outline-none flex items-center gap-3 transition-colors" data-insert="\n\n---\n\n">
     <span class="material-symbols-outlined text-outline">horizontal_rule</span>
     <div class="flex flex-col"><span class="text-on-surface font-semibold text-sm">구분선</span><span class="text-xs text-outline">시각적으로 구역 나누기</span></div>
+  </button>
+  
+  <div class="px-4 py-1 mt-2 text-xs font-bold text-outline uppercase tracking-wider">인라인 & 미디어</div>
+  <button class="slash-item text-left px-4 py-2 hover:bg-surface-container-low focus:bg-surface-container-low outline-none flex items-center gap-3 transition-colors" data-insert="**굵은 글씨**">
+    <span class="material-symbols-outlined text-outline">format_bold</span>
+    <div class="flex flex-col"><span class="text-on-surface font-semibold text-sm">굵은 글씨</span><span class="text-xs text-outline">텍스트를 굵게 강조</span></div>
+  </button>
+  <button class="slash-item text-left px-4 py-2 hover:bg-surface-container-low focus:bg-surface-container-low outline-none flex items-center gap-3 transition-colors" data-insert="*기울임*">
+    <span class="material-symbols-outlined text-outline">format_italic</span>
+    <div class="flex flex-col"><span class="text-on-surface font-semibold text-sm">기울임 꼴</span><span class="text-xs text-outline">텍스트를 기울여서 강조</span></div>
+  </button>
+  <button class="slash-item text-left px-4 py-2 hover:bg-surface-container-low focus:bg-surface-container-low outline-none flex items-center gap-3 transition-colors" data-insert="[링크 텍스트](url)">
+    <span class="material-symbols-outlined text-outline">link</span>
+    <div class="flex flex-col"><span class="text-on-surface font-semibold text-sm">링크</span><span class="text-xs text-outline">웹 페이지 연결</span></div>
+  </button>
+  <button class="slash-item text-left px-4 py-2 hover:bg-surface-container-low focus:bg-surface-container-low outline-none flex items-center gap-3 transition-colors" data-insert="![이미지 설명](url)">
+    <span class="material-symbols-outlined text-outline">image</span>
+    <div class="flex flex-col"><span class="text-on-surface font-semibold text-sm">이미지</span><span class="text-xs text-outline">이미지 삽입</span></div>
+  </button>
+  
+  <div class="px-4 py-1 mt-2 text-xs font-bold text-outline uppercase tracking-wider">고급 블록</div>
+  <button class="slash-item text-left px-4 py-2 hover:bg-surface-container-low focus:bg-surface-container-low outline-none flex items-center gap-3 transition-colors" data-insert="\n\n| 제목 1 | 제목 2 |\n| --- | --- |\n| 내용 | 내용 |\n">
+    <span class="material-symbols-outlined text-outline">table_chart</span>
+    <div class="flex flex-col"><span class="text-on-surface font-semibold text-sm">표</span><span class="text-xs text-outline">데이터 표 삽입</span></div>
+  </button>
+  <button class="slash-item text-left px-4 py-2 hover:bg-surface-container-low focus:bg-surface-container-low outline-none flex items-center gap-3 transition-colors" data-insert="\n> [!info]\n> 콜아웃(정보) 내용을 입력하세요.\n">
+    <span class="material-symbols-outlined text-outline">info</span>
+    <div class="flex flex-col"><span class="text-on-surface font-semibold text-sm">콜아웃</span><span class="text-xs text-outline">눈에 띄는 정보 상자</span></div>
+  </button>
+  <button class="slash-item text-left px-4 py-2 hover:bg-surface-container-low focus:bg-surface-container-low outline-none flex items-center gap-3 transition-colors" data-insert="\n<details>\n<summary>토글 제목을 입력하세요</summary>\n\n여기에 숨겨질 상세 내용을 작성하세요.\n\n</details>\n">
+    <span class="material-symbols-outlined text-outline">unfold_more</span>
+    <div class="flex flex-col"><span class="text-on-surface font-semibold text-sm">토글 목록</span><span class="text-xs text-outline">접었다 펼 수 있는 목록</span></div>
   </button>
 </div>
 
