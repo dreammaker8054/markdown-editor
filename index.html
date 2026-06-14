@@ -130,7 +130,7 @@
             .mobile-bottom-nav { display: none; }
         }
     </style>
-  <script type="module" crossorigin src="/markdown-editor/assets/index-DjzsG-je.js"></script>
+  <script type="module" crossorigin src="/markdown-editor/assets/index-BnaBuEkj.js"></script>
   <link rel="stylesheet" crossorigin href="/markdown-editor/assets/index-PV3J0m71.css">
 </head>
 <body class="bg-background text-on-background font-body-ui h-screen overflow-hidden flex flex-row">
@@ -264,6 +264,43 @@
 <div id="preview" class="prose max-w-none hidden md:flex-1 overflow-y-auto min-h-[700px] font-body-main text-body-main leading-relaxed text-on-background markdown-body"></div>
 </div>
 </div>
+
+<div id="slash-menu" class="hidden absolute z-50 w-64 bg-white border border-outline-variant shadow-xl rounded-xl overflow-hidden flex flex-col py-2 font-body-ui" style="max-height: 320px; overflow-y: auto;">
+  <div class="px-4 py-1 text-xs font-bold text-outline uppercase tracking-wider">기본 블록</div>
+  <button class="slash-item text-left px-4 py-2 hover:bg-surface-container-low focus:bg-surface-container-low outline-none flex items-center gap-3 transition-colors" data-insert="\n# ">
+    <span class="material-symbols-outlined text-outline">title</span>
+    <div class="flex flex-col"><span class="text-on-surface font-semibold text-sm">제목 1</span><span class="text-xs text-outline">큰 섹션 제목</span></div>
+  </button>
+  <button class="slash-item text-left px-4 py-2 hover:bg-surface-container-low focus:bg-surface-container-low outline-none flex items-center gap-3 transition-colors" data-insert="\n## ">
+    <span class="material-symbols-outlined text-outline">format_h2</span>
+    <div class="flex flex-col"><span class="text-on-surface font-semibold text-sm">제목 2</span><span class="text-xs text-outline">중간 섹션 제목</span></div>
+  </button>
+  <button class="slash-item text-left px-4 py-2 hover:bg-surface-container-low focus:bg-surface-container-low outline-none flex items-center gap-3 transition-colors" data-insert="\n### ">
+    <span class="material-symbols-outlined text-outline">format_h3</span>
+    <div class="flex flex-col"><span class="text-on-surface font-semibold text-sm">제목 3</span><span class="text-xs text-outline">작은 섹션 제목</span></div>
+  </button>
+  <button class="slash-item text-left px-4 py-2 hover:bg-surface-container-low focus:bg-surface-container-low outline-none flex items-center gap-3 transition-colors" data-insert="\n* ">
+    <span class="material-symbols-outlined text-outline">format_list_bulleted</span>
+    <div class="flex flex-col"><span class="text-on-surface font-semibold text-sm">글머리 목록</span><span class="text-xs text-outline">간단한 목록 생성</span></div>
+  </button>
+  <button class="slash-item text-left px-4 py-2 hover:bg-surface-container-low focus:bg-surface-container-low outline-none flex items-center gap-3 transition-colors" data-insert="\n1. ">
+    <span class="material-symbols-outlined text-outline">format_list_numbered</span>
+    <div class="flex flex-col"><span class="text-on-surface font-semibold text-sm">번호 목록</span><span class="text-xs text-outline">순서가 있는 목록</span></div>
+  </button>
+  <button class="slash-item text-left px-4 py-2 hover:bg-surface-container-low focus:bg-surface-container-low outline-none flex items-center gap-3 transition-colors" data-insert="\n- [ ] ">
+    <span class="material-symbols-outlined text-outline">checklist</span>
+    <div class="flex flex-col"><span class="text-on-surface font-semibold text-sm">할 일 목록</span><span class="text-xs text-outline">체크박스가 있는 목록</span></div>
+  </button>
+  <button class="slash-item text-left px-4 py-2 hover:bg-surface-container-low focus:bg-surface-container-low outline-none flex items-center gap-3 transition-colors" data-insert="\n> ">
+    <span class="material-symbols-outlined text-outline">format_quote</span>
+    <div class="flex flex-col"><span class="text-on-surface font-semibold text-sm">인용구</span><span class="text-xs text-outline">눈에 띄는 인용문</span></div>
+  </button>
+  <button class="slash-item text-left px-4 py-2 hover:bg-surface-container-low focus:bg-surface-container-low outline-none flex items-center gap-3 transition-colors" data-insert="\n\n---\n\n">
+    <span class="material-symbols-outlined text-outline">horizontal_rule</span>
+    <div class="flex flex-col"><span class="text-on-surface font-semibold text-sm">구분선</span><span class="text-xs text-outline">시각적으로 구역 나누기</span></div>
+  </button>
+</div>
+
 </main>
 
 </div>
