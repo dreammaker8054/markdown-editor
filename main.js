@@ -78,6 +78,7 @@ async function updatePreview() {
 
 // Initial render
 updatePreview();
+setMode('split'); // Set default mode to split
 
 // Event listeners
 editor.addEventListener('input', updatePreview);
