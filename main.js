@@ -287,3 +287,142 @@ if (zoomInput) {
     }
   });
 }
+
+// --- Slash Command (Notion-style) ---
+const slashMenu = document.getElementById('slash-menu');
+const slashItems = document.querySelectorAll('.slash-item');
+let slashMenuOpen = false;
+let slashStartIndex = -1;
+let currentSlashFocus = -1;
+
+function getCaretCoordinates(element, position) {
+  const div = document.createElement('div');
+  const style = window.getComputedStyle(element);
+  for (const prop of style) { div.style[prop] = style[prop]; }
+  div.style.position = 'absolute';
+  div.style.visibility = 'hidden';
+  div.style.whiteSpace = 'pre-wrap';
+  div.style.wordWrap = 'break-word';
+  div.textContent = element.value.substring(0, position);
+  const span = document.createElement('span');
+  span.textContent = element.value.substring(position) || '.';
+  div.appendChild(span);
+  document.body.appendChild(div);
+  const coordinates = {
+    top: span.offsetTop - element.scrollTop,
+    left: span.offsetLeft - element.scrollLeft,
+    height: parseInt(style.lineHeight) || 20
+  };
+  document.body.removeChild(div);
+  return coordinates;
+}
+
+function openSlashMenu(index) {
+  slashMenuOpen = true;
+  slashStartIndex = index;
+  currentSlashFocus = -1;
+  slashMenu.classList.remove('hidden');
+  
+  const coords = getCaretCoordinates(editor, index);
+  const editorRect = editor.getBoundingClientRect();
+  
+  let topPos = editorRect.top + coords.top + coords.height + window.scrollY;
+  let leftPos = editorRect.left + coords.left + window.scrollX;
+  
+  if (topPos + 320 > window.innerHeight) {
+    topPos = topPos - 320 - coords.height;
+  }
+  
+  slashMenu.style.top = `${topPos}px`;
+  slashMenu.style.left = `${leftPos}px`;
+}
+
+function closeSlashMenu() {
+  slashMenuOpen = false;
+  slashStartIndex = -1;
+  slashMenu.classList.add('hidden');
+  slashItems.forEach(item => item.classList.remove('bg-surface-container-low'));
+}
+
+function insertSlashItem(item) {
+  if (slashStartIndex === -1) return;
+  const insertText = item.getAttribute('data-insert');
+  const text = editor.value;
+  const before = text.substring(0, slashStartIndex);
+  const after = text.substring(editor.selectionEnd);
+  
+  editor.value = before + insertText + after;
+  updatePreview();
+  
+  const newPos = slashStartIndex + insertText.length;
+  editor.focus();
+  editor.selectionStart = newPos;
+  editor.selectionEnd = newPos;
+  
+  closeSlashMenu();
+}
+
+editor.addEventListener('input', (e) => {
+  if (!slashMenuOpen) {
+    const pos = editor.selectionStart;
+    const textBeforeCursor = editor.value.substring(0, pos);
+    if (textBeforeCursor.endsWith('/')) {
+      if (textBeforeCursor.length === 1 || /[\s\n]$/.test(textBeforeCursor.charAt(textBeforeCursor.length - 2))) {
+        openSlashMenu(pos - 1);
+      }
+    }
+  } else {
+    const pos = editor.selectionStart;
+    if (pos <= slashStartIndex || editor.value.charAt(slashStartIndex) !== '/') {
+      closeSlashMenu();
+    }
+  }
+});
+
+editor.addEventListener('keydown', (e) => {
+  if (!slashMenuOpen) return;
+  
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    currentSlashFocus = (currentSlashFocus + 1) % slashItems.length;
+    updateSlashFocus();
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    currentSlashFocus = currentSlashFocus <= 0 ? slashItems.length - 1 : currentSlashFocus - 1;
+    updateSlashFocus();
+  } else if (e.key === 'Enter') {
+    e.preventDefault();
+    if (currentSlashFocus >= 0) {
+      insertSlashItem(slashItems[currentSlashFocus]);
+    } else {
+      insertSlashItem(slashItems[0]);
+    }
+  } else if (e.key === 'Escape') {
+    closeSlashMenu();
+  }
+});
+
+function updateSlashFocus() {
+  slashItems.forEach((item, idx) => {
+    if (idx === currentSlashFocus) {
+      item.classList.add('bg-surface-container-low');
+      item.scrollIntoView({ block: 'nearest' });
+    } else {
+      item.classList.remove('bg-surface-container-low');
+    }
+  });
+}
+
+slashItems.forEach(item => {
+  item.addEventListener('click', () => insertSlashItem(item));
+  item.addEventListener('mouseenter', () => {
+    currentSlashFocus = Array.from(slashItems).indexOf(item);
+    updateSlashFocus();
+  });
+});
+
+document.addEventListener('click', (e) => {
+  if (slashMenuOpen && e.target !== editor && !slashMenu.contains(e.target)) {
+    closeSlashMenu();
+  }
+});
