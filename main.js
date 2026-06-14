@@ -23,20 +23,47 @@ marked.setOptions({
 const STORAGE_KEY = 'md_editor_content';
 
 // Default content matching the design's placeholder
-const defaultContent = `# 미니멀리즘의 예술
+const defaultContent = `# 환영합니다! 👋
 
-글쓰기는 단순히 공간을 채우는 것이 아닙니다. 그것은 공허함 속에서 의미를 **조각해내는** 과정입니다. 인터페이스를 걷어내면 비로소 단어들이 숨을 쉬기 시작합니다.
+이곳은 마크다운(Markdown)을 편하게 작성하고 실시간으로 미리 볼 수 있는 웹 에디터입니다.
 
-## 핵심 원칙
+## 📝 마크다운 기본 문법
 
-* 핵심 메시지에 집중하세요.
-* 불필요한 형용사를 제거하세요.
-* 독자의 지성을 믿으세요.
+여러분은 다음과 같은 다양한 서식을 쉽게 적용할 수 있습니다:
 
-> "단순함은 궁극의 정교함이다."
-> — 레오나르도 다 빈치
+* **굵은 글씨**나 *기울임 꼴*을 사용해 강조해 보세요.
+* [링크](https://github.com)를 걸거나 아래처럼 이미지를 넣을 수도 있습니다.
 
-더 깊은 영감을 원하신다면 [아카이브](#)를 방문하여 딥 워크와 창의적 흐름에 대해 알아보세요.`;
+![Markdown](https://via.placeholder.com/800x120?text=Markdown+Editor)
+
+### 1. 목록 만들기
+1. 번호가 있는 목록
+2. 순서가 없는 목록
+   - 하위 항목
+   - [ ] 할 일 (체크박스)
+   - [x] 완료된 일
+
+### 2. 인용구 및 코드
+> "글을 쓰는 것은 생각을 정리하는 가장 좋은 방법입니다."
+
+\`\`\`javascript
+// 코드 블록 예시
+function greet(name) {
+  console.log(\`Hello, \${name}!\`);
+}
+greet('World');
+\`\`\`
+
+### 3. 표 (Table)
+
+| 기능 | 단축키 / 기호 |
+| --- | --- |
+| 굵게 | \`**텍스트**\` |
+| 제목 | \`# 제목\` |
+
+---
+
+상단의 툴바를 이용하거나, 빈 줄에서 **\`/\` (슬래시)**를 입력하여 더 많은 기능을 빠르게 호출해 보세요! 🎉`;
 
 const savedContent = localStorage.getItem(STORAGE_KEY);
 editor.value = savedContent || defaultContent;
