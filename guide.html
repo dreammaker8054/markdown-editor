@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Inter:wght@400;500;600&amp;family=Public+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#ffdad6",
+                        "surface-container": "#efedee",
+                        "on-surface-variant": "#434653",
+                        "on-secondary-fixed-variant": "#42474b",
+                        "secondary-fixed-dim": "#c2c7cc",
+                        "secondary-container": "#dfe3e8",
+                        "outline-variant": "#c3c6d5",
+                        "primary-fixed": "#d9e2ff",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#211b00",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#2259bf",
+                        "on-secondary-container": "#606569",
+                        "on-tertiary-fixed-variant": "#524600",
+                        "surface-variant": "#e3e2e3",
+                        "surface": "#faf9fa",
+                        "primary-fixed-dim": "#b1c5ff",
+                        "secondary": "#5a5f63",
+                        "on-tertiary-container": "#4a3f00",
+                        "on-background": "#1b1c1d",
+                        "tertiary-fixed-dim": "#dcc661",
+                        "tertiary-container": "#bfab49",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#00419d",
+                        "inverse-surface": "#303031",
+                        "secondary-fixed": "#dfe3e8",
+                        "inverse-on-surface": "#f2f0f1",
+                        "surface-container-low": "#f5f3f4",
+                        "surface-container-high": "#e9e8e9",
+                        "on-primary-container": "#e7ebff",
+                        "primary-container": "#3366cc",
+                        "surface-dim": "#dbdadb",
+                        "tertiary-fixed": "#f9e37a",
+                        "surface-container-highest": "#e3e2e3",
+                        "on-surface": "#1b1c1d",
+                        "background": "#faf9fa",
+                        "tertiary": "#6d5e00",
+                        "surface-bright": "#faf9fa",
+                        "on-primary-fixed": "#001946",
+                        "inverse-primary": "#b1c5ff",
+                        "primary": "#094cb2",
+                        "on-secondary-fixed": "#171c20",
+                        "outline": "#737784"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif"],
+                        "display": ["Noto Serif"],
+                        "body": ["Inter"],
+                        "label": ["Public Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Noto Serif', serif; }
+        .font-label { font-family: 'Public Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .syntax-block {
+            background-color: #f5f3f4;
+            border-left: 4px solid #094cb2;
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 0.875rem;
+            color: #434653;
+        }
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-50 bg-surface/80 glass-effect">
+<div class="flex items-center justify-between px-6 py-4 max-w-screen-xl mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer active:opacity-80 transition-colors duration-300" data-icon="menu_book">menu_book</span>
+<h1 class="font-headline font-bold text-primary text-2xl leading-relaxed tracking-tight">마크다운 가이드</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:bg-surface-variant/50 p-2 rounded-full transition-all" data-icon="search">search</span>
+</div>
+</div>
+</header>
+<main class="max-w-3xl mx-auto px-6 pt-12 pb-32">
+<!-- Hero Section -->
+<section class="mb-16">
+<h2 class="font-headline text-4xl lg:text-5xl font-bold mb-6 text-on-surface leading-tight">마크다운을 활용해 문서를 더 아름답고 구조적으로 작성해보세요.</h2>
+<div class="w-full h-64 relative rounded-xl overflow-hidden mb-8 group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A premium high-angle shot of a minimalist wooden desk featuring an open leather-bound journal and a classic fountain pen. The lighting is soft and golden, suggesting a quiet scholarly environment. The color palette consists of warm wood tones, deep navy blue ink, and off-white paper, creating a high-end editorial and intellectual atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsUY_lMIsvSkar3E-jVlhuZr0sd9GK9aXO1lYoJ4Zg280p_vj3LVE1nL9OUVLmHIESQQ_8D4zm4zdM7Vwd2rsEVseMEyiJMKzIHeC9oBQKPLNX6J6quywilpKQG6Bk0ccNTeVT74QTBLe83A99AKWlQ2W-SN7Z_fhxJUAv1ztj1uJ880CEDFqDWyqA1yFI9wBhGwcycdUA5mOp_soPNFJUZItE4opOjn-RQIZYZMY97MGv7Ba0W0xLpzpd7oc1VLlaJmfOan15aPgG"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+</div>
+</section>
+<!-- Guide Content -->
+<div class="space-y-20">
+
+<!-- 1. 제목 (Headers) -->
+<section class="space-y-6">
+<div class="flex items-baseline gap-4">
+<span class="font-label text-tertiary font-bold tracking-widest text-xs uppercase">Technique 01</span>
+<h3 class="font-headline text-2xl font-bold border-b border-outline-variant pb-2 flex-grow">제목 (Headers)</h3>
+</div>
+<div class="grid md:grid-cols-2 gap-8">
+<div class="space-y-3">
+<p class="font-label text-xs font-semibold text-outline uppercase tracking-wider">문법 (Syntax)</p>
+<div class="syntax-block rounded-lg">
+# H1 가장 큰 제목<br/>
+## H2 두 번째로 큰 제목<br/>
+### H3 세 번째로 큰 제목<br/>
+#### H4 네 번째로 큰 제목<br/>
+##### H5 다섯 번째로 큰 제목<br/>
+###### H6 가장 작은 제목
+</div>
+</div>
+<div class="space-y-3">
+<p class="font-label text-xs font-semibold text-outline uppercase tracking-wider">결과 (Result)</p>
+<div class="p-6 bg-surface-container-lowest rounded-lg space-y-4">
+<h1 class="font-headline text-3xl font-bold">H1 가장 큰 제목</h1>
+<h2 class="font-headline text-2xl font-semibold">H2 두 번째로 큰 제목</h2>
+<h3 class="font-headline text-xl font-medium">H3 세 번째로 큰 제목</h3>
+<h4 class="font-headline text-lg font-medium">H4 네 번째로 큰 제목</h4>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 2. 텍스트 강조 (Text Styling) -->
+<section class="space-y-6">
+<div class="flex items-baseline gap-4">
+<span class="font-label text-tertiary font-bold tracking-widest text-xs uppercase">Technique 02</span>
+<h3 class="font-headline text-2xl font-bold border-b border-outline-variant pb-2 flex-grow">텍스트 강조 (Text Styling)</h3>
+</div>
+<div class="grid md:grid-cols-2 gap-8">
+<div class="space-y-3">
+<p class="font-label text-xs font-semibold text-outline uppercase tracking-wider">문법 (Syntax)</p>
+<div class="syntax-block rounded-lg">
+**굵게 (Bold)**<br/>
+*기울임 (Italic)*<br/>
+***굵고 기울게***<br/>
+~~취소선 (Strikethrough)~~
+</div>
+</div>
+<div class="space-y-3">
+<p class="font-label text-xs font-semibold text-outline uppercase tracking-wider">결과 (Result)</p>
+<div class="p-6 bg-surface-container-lowest rounded-lg text-on-surface border border-outline-variant/10">
+<p class="font-bold mb-2">굵게 (Bold)</p>
+<p class="italic mb-2">기울임 (Italic)</p>
+<p class="font-bold italic mb-2">굵고 기울게</p>
+<p class="line-through">취소선 (Strikethrough)</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 3. 목록 (Lists) -->
+<section class="space-y-6">
+<div class="flex items-baseline gap-4">
+<span class="font-label text-tertiary font-bold tracking-widest text-xs uppercase">Technique 03</span>
+<h3 class="font-headline text-2xl font-bold border-b border-outline-variant pb-2 flex-grow">목록 (Lists)</h3>
+</div>
+<div class="grid md:grid-cols-2 gap-8">
+<div class="space-y-3">
+<p class="font-label text-xs font-semibold text-outline uppercase tracking-wider">문법 (Syntax)</p>
+<div class="syntax-block rounded-lg">
+- 순서가 없는 목록 1<br/>
+- 순서가 없는 목록 2<br/>
+  - 하위 목록<br/>
+<br/>
+1. 순서가 있는 목록 1<br/>
+2. 순서가 있는 목록 2<br/>
+<br/>
+- [ ] 미완료 할일<br/>
+- [x] 완료된 할일
+</div>
+</div>
+<div class="space-y-3">
+<p class="font-label text-xs font-semibold text-outline uppercase tracking-wider">결과 (Result)</p>
+<div class="p-6 bg-surface-container-lowest rounded-lg">
+<ul class="list-disc list-inside mb-4 space-y-1">
+<li>순서가 없는 목록 1</li>
+<li>순서가 없는 목록 2
+  <ul class="list-circle list-inside ml-6"><li>하위 목록</li></ul>
+</li>
+</ul>
+<ol class="list-decimal list-inside mb-4 space-y-1">
+<li>순서가 있는 목록 1</li>
+<li>순서가 있는 목록 2</li>
+</ol>
+<div class="flex items-center gap-2 mb-1"><input type="checkbox" disabled> 미완료 할일</div>
+<div class="flex items-center gap-2"><input type="checkbox" checked disabled> 완료된 할일</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 4. 링크 및 이미지 (Links & Images) -->
+<section class="space-y-6">
+<div class="flex items-baseline gap-4">
+<span class="font-label text-tertiary font-bold tracking-widest text-xs uppercase">Technique 04</span>
+<h3 class="font-headline text-2xl font-bold border-b border-outline-variant pb-2 flex-grow">링크 및 이미지 (Links & Images)</h3>
+</div>
+<div class="grid md:grid-cols-2 gap-8">
+<div class="space-y-3">
+<p class="font-label text-xs font-semibold text-outline uppercase tracking-wider">문법 (Syntax)</p>
+<div class="syntax-block rounded-lg overflow-x-auto whitespace-nowrap">
+[구글 링크](https://google.com)<br/>
+<br/>
+![대체 텍스트](image_url)<br/>
+<br/>
+[![클릭가능한 이미지](image_url)](https://google.com)
+</div>
+</div>
+<div class="space-y-3">
+<p class="font-label text-xs font-semibold text-outline uppercase tracking-wider">결과 (Result)</p>
+<div class="p-6 bg-surface-container-lowest rounded-lg flex flex-col gap-4">
+<a class="text-primary font-medium underline underline-offset-4 decoration-primary/30 hover:decoration-primary transition-all" href="#">구글 링크</a>
+<div class="w-full aspect-video bg-surface-container-high rounded flex items-center justify-center relative overflow-hidden">
+<span class="text-outline">이미지 표시 영역</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 5. 코드 (Code) -->
+<section class="space-y-6">
+<div class="flex items-baseline gap-4">
+<span class="font-label text-tertiary font-bold tracking-widest text-xs uppercase">Technique 05</span>
+<h3 class="font-headline text-2xl font-bold border-b border-outline-variant pb-2 flex-grow">코드 (Code)</h3>
+</div>
+<div class="grid md:grid-cols-2 gap-8">
+<div class="space-y-3">
+<p class="font-label text-xs font-semibold text-outline uppercase tracking-wider">문법 (Syntax)</p>
+<div class="syntax-block rounded-lg">
+`인라인 코드`를 입력할 때 사용합니다.<br/>
+<br/>
+```python<br/>
+def hello_world():<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;print("Hello, Markdown!")<br/>
+```
+</div>
+</div>
+<div class="space-y-3">
+<p class="font-label text-xs font-semibold text-outline uppercase tracking-wider">결과 (Result)</p>
+<div class="p-6 bg-surface-container-lowest rounded-lg border-l-8 border-tertiary/20">
+<p class="mb-4"><code class="bg-surface-variant px-1.5 py-0.5 rounded text-sm text-[#e06c75]">인라인 코드</code>를 입력할 때 사용합니다.</p>
+<pre class="bg-[#282c34] text-[#abb2bf] p-4 rounded-lg overflow-x-auto text-sm"><code><span class="text-[#c678dd]">def</span> <span class="text-[#61aeee]">hello_world</span>():
+    <span class="text-[#56b6c2]">print</span>(<span class="text-[#98c379]">"Hello, Markdown!"</span>)</code></pre>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 6. 표 (Tables) -->
+<section class="space-y-6">
+<div class="flex items-baseline gap-4">
+<span class="font-label text-tertiary font-bold tracking-widest text-xs uppercase">Technique 06</span>
+<h3 class="font-headline text-2xl font-bold border-b border-outline-variant pb-2 flex-grow">표 (Tables)</h3>
+</div>
+<div class="grid md:grid-cols-2 gap-8">
+<div class="space-y-3">
+<p class="font-label text-xs font-semibold text-outline uppercase tracking-wider">문법 (Syntax)</p>
+<div class="syntax-block rounded-lg overflow-x-auto whitespace-nowrap">
+| 이름 | 나이 | 직업 |<br/>
+| :--- | :---: | ---: |<br/>
+| 철수 | 25 | 개발자 |<br/>
+| 영희 | 28 | 디자이너 |<br/>
+<br/>
+* 콜론(:)으로 정렬(좌,중,우) 설정 가능
+</div>
+</div>
+<div class="space-y-3">
+<p class="font-label text-xs font-semibold text-outline uppercase tracking-wider">결과 (Result)</p>
+<div class="p-6 bg-surface-container-lowest rounded-lg border-l-8 border-tertiary/20 overflow-x-auto">
+<table class="w-full text-left border-collapse">
+  <thead>
+    <tr>
+      <th class="border-b border-outline-variant p-2">이름</th>
+      <th class="border-b border-outline-variant p-2 text-center">나이</th>
+      <th class="border-b border-outline-variant p-2 text-right">직업</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="border-b border-outline-variant/30 p-2">철수</td>
+      <td class="border-b border-outline-variant/30 p-2 text-center">25</td>
+      <td class="border-b border-outline-variant/30 p-2 text-right">개발자</td>
+    </tr>
+    <tr>
+      <td class="p-2">영희</td>
+      <td class="p-2 text-center">28</td>
+      <td class="p-2 text-right">디자이너</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 7. 인용구 (Blockquotes) -->
+<section class="space-y-6">
+<div class="flex items-baseline gap-4">
+<span class="font-label text-tertiary font-bold tracking-widest text-xs uppercase">Technique 07</span>
+<h3 class="font-headline text-2xl font-bold border-b border-outline-variant pb-2 flex-grow">인용구 (Blockquotes)</h3>
+</div>
+<div class="grid md:grid-cols-2 gap-8">
+<div class="space-y-3">
+<p class="font-label text-xs font-semibold text-outline uppercase tracking-wider">문법 (Syntax)</p>
+<div class="syntax-block rounded-lg">
+&gt; 첫 번째 인용구입니다.<br/>
+&gt;&gt; 중첩된 인용구도 가능합니다.<br/>
+&gt; 인용문 안에 **굵은 글씨**도 됩니다.
+</div>
+</div>
+<div class="space-y-3">
+<p class="font-label text-xs font-semibold text-outline uppercase tracking-wider">결과 (Result)</p>
+<div class="p-6 bg-surface-container-lowest rounded-lg border-l-8 border-tertiary/20">
+<blockquote class="pl-4 border-l-4 border-primary text-on-surface-variant mb-2">
+  첫 번째 인용구입니다.
+  <blockquote class="pl-4 border-l-4 border-outline mt-2 text-outline">
+    중첩된 인용구도 가능합니다.
+  </blockquote>
+  <p class="mt-2">인용문 안에 <strong>굵은 글씨</strong>도 됩니다.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 8. 수평선 & 줄바꿈 (Horizontal Rule & Break) -->
+<section class="space-y-6">
+<div class="flex items-baseline gap-4">
+<span class="font-label text-tertiary font-bold tracking-widest text-xs uppercase">Technique 08</span>
+<h3 class="font-headline text-2xl font-bold border-b border-outline-variant pb-2 flex-grow">수평선 및 특수문자 이스케이프</h3>
+</div>
+<div class="grid md:grid-cols-2 gap-8">
+<div class="space-y-3">
+<p class="font-label text-xs font-semibold text-outline uppercase tracking-wider">문법 (Syntax)</p>
+<div class="syntax-block rounded-lg">
+수평선 그리기:<br/>
+---<br/>
+***<br/>
+___<br/><br/>
+이스케이프 (기호 표시):<br/>
+\* 이 별표는 기호로 표시됩니다.<br/>
+\# 샵 기호 표시
+</div>
+</div>
+<div class="space-y-3">
+<p class="font-label text-xs font-semibold text-outline uppercase tracking-wider">결과 (Result)</p>
+<div class="p-6 bg-surface-container-lowest rounded-lg">
+<p class="mb-4">수평선 그리기:</p>
+<hr class="border-t-2 border-outline-variant my-4"/>
+<p class="mb-4 mt-8">이스케이프 (기호 표시):</p>
+<p>* 이 별표는 기호로 표시됩니다.</p>
+<p># 샵 기호 표시</p>
+</div>
+</div>
+</div>
+</section>
+
+</div>
+</main>
+</body></html>
