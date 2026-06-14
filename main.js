@@ -34,7 +34,7 @@ const defaultContent = `# 환영합니다! 👋
 * **굵은 글씨**나 *기울임 꼴*을 사용해 강조해 보세요.
 * [링크](https://github.com)를 걸거나 아래처럼 이미지를 넣을 수도 있습니다.
 
-![Markdown](https://via.placeholder.com/800x120?text=Markdown+Editor)
+![Markdown](https://placehold.co/800x120/003ec7/FFFFFF/png?text=Markdown+Editor)
 
 ### 1. 목록 만들기
 1. 번호가 있는 목록
