@@ -138,18 +138,9 @@
 <!-- Main Content -->
 <div class="flex-1 flex flex-col min-w-0 bg-surface">
 <!-- TopAppBar -->
-<header class="bg-surface w-full h-14 sticky top-0 border-b border-outline-variant z-40 flex items-center px-4 md:px-container-margin justify-between">
-<div class="flex items-center gap-stack-sm min-w-0">
-<button class="md:hidden p-2 hover:bg-surface-container-low rounded-full">
-<span class="material-symbols-outlined text-primary">menu</span>
-</button>
-<div class="flex items-center gap-2 min-w-0">
-<h1 class="font-h2 text-h2 text-on-surface truncate">제목 없는 문서</h1>
-<span class="material-symbols-outlined text-outline text-sm hidden md:inline">edit</span>
-</div>
-</div>
-<div class="flex items-center gap-2">
-<div class="hidden md:flex items-center gap-1 bg-surface-container rounded-lg px-2 py-1 border border-transparent focus-within:border-primary transition-colors">
+<header class="bg-surface w-full h-14 sticky top-0 border-b border-outline-variant z-40 flex items-center px-4 md:px-container-margin">
+<div class="flex items-center gap-3 w-full overflow-x-auto custom-scrollbar pb-1 pt-1">
+<div class="flex items-center gap-1 bg-surface-container rounded-lg px-2 py-1 border border-transparent focus-within:border-primary transition-colors shrink-0">
 <select id="zoom-select" class="bg-transparent text-on-surface text-sm font-medium outline-none cursor-pointer border-none focus:ring-0 p-0 pr-6" title="화면 배율">
   <option value="50">50%</option>
   <option value="75">75%</option>
@@ -161,32 +152,31 @@
 <input type="number" id="zoom-input" class="bg-transparent text-on-surface text-sm font-medium w-10 text-right outline-none border-none focus:ring-0 p-0" placeholder="100" title="커스텀 배율 입력">
 <span class="text-sm font-medium text-on-surface ml-0.5">%</span>
 </div>
-<div class="hidden md:flex bg-surface-container rounded-lg p-0.5">
-<button id="btn-edit" class="px-3 py-1 text-sm font-medium bg-white shadow-sm rounded-md text-on-surface">편집</button>
-<button id="btn-split" class="px-3 py-1 text-sm font-medium text-outline hover:text-on-surface transition-colors">스플릿</button>
-<button id="btn-preview" class="px-3 py-1 text-sm font-medium text-outline hover:text-on-surface transition-colors">미리보기</button>
+<div class="flex bg-surface-container rounded-lg p-0.5 shrink-0">
+<button id="btn-edit" class="px-3 py-1 text-sm font-medium bg-white shadow-sm rounded-md text-on-surface shrink-0">편집</button>
+<button id="btn-split" class="px-3 py-1 text-sm font-medium text-outline hover:text-on-surface transition-colors shrink-0">스플릿</button>
+<button id="btn-preview" class="px-3 py-1 text-sm font-medium text-outline hover:text-on-surface transition-colors shrink-0">미리보기</button>
 </div>
-<button id="btn-guide" class="text-primary hover:bg-primary-fixed-dim px-3 py-1.5 rounded-full text-body-ui font-bold transition-colors flex items-center gap-1" title="마크다운 가이드">
+<button id="btn-guide" class="text-primary hover:bg-primary-fixed-dim px-3 py-1.5 rounded-full text-body-ui font-bold transition-colors flex items-center gap-1 shrink-0" title="마크다운 가이드">
 <span class="material-symbols-outlined text-lg">help</span>
 <span class="hidden sm:inline">가이드</span>
 </button>
-<button id="btn-new" class="text-on-surface-variant hover:bg-surface-container-low px-3 py-1.5 rounded-full text-body-ui font-bold transition-colors flex items-center gap-1" title="새 문서">
+<button id="btn-new" class="text-on-surface-variant hover:bg-surface-container-low px-3 py-1.5 rounded-full text-body-ui font-bold transition-colors flex items-center gap-1 shrink-0" title="새 문서">
 <span class="material-symbols-outlined text-lg">note_add</span>
 <span class="hidden sm:inline">새 문서</span>
 </button>
-<button id="btn-open" class="text-on-surface-variant hover:bg-surface-container-low px-3 py-1.5 rounded-full text-body-ui font-bold transition-colors flex items-center gap-1" title="파일 열기">
+<button id="btn-open" class="text-on-surface-variant hover:bg-surface-container-low px-3 py-1.5 rounded-full text-body-ui font-bold transition-colors flex items-center gap-1 shrink-0" title="파일 열기">
 <span class="material-symbols-outlined text-lg">folder_open</span>
 <span class="hidden sm:inline">열기</span>
 </button>
-<button id="btn-download" class="text-on-surface-variant hover:bg-surface-container-low px-3 py-1.5 rounded-full text-body-ui font-bold transition-colors flex items-center gap-1" title="다운로드">
+<button id="btn-download" class="text-on-surface-variant hover:bg-surface-container-low px-3 py-1.5 rounded-full text-body-ui font-bold transition-colors flex items-center gap-1 shrink-0" title="다운로드">
 <span class="material-symbols-outlined text-lg">download</span>
 <span class="hidden sm:inline">저장</span>
 </button>
-<button id="btn-copy" class="bg-primary text-white hover:bg-primary-container px-4 py-1.5 rounded-full text-body-ui font-bold transition-colors flex items-center gap-2" title="마크다운 복사">
+<button id="btn-copy" class="bg-primary text-white hover:bg-primary-container px-4 py-1.5 rounded-full text-body-ui font-bold transition-colors flex items-center gap-2 shrink-0" title="마크다운 복사">
 <span class="material-symbols-outlined text-lg" id="copy-icon">content_copy</span>
 <span class="hidden sm:inline" id="copy-text">복사</span>
 </button>
-
 </div>
 </header>
 <!-- Editor View (SCREEN_4) -->
