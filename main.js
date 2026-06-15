@@ -266,12 +266,8 @@ document.querySelectorAll('.group').forEach(btn => {
       case 'unfold_more': insert = '\n<details>\n<summary>토글 제목을 입력하세요</summary>\n\n여기에 숨겨질 상세 내용을 작성하세요.\n\n</details>\n'; break;
     }
     if (insert) {
-      const start = editor.selectionStart;
-      const end = editor.selectionEnd;
-      editor.value = editor.value.substring(0, start) + insert + editor.value.substring(end);
-      editor.focus();
-      editor.selectionStart = start + insert.length;
-      editor.selectionEnd = start + insert.length;
+      editor.setRangeText(insert, editor.selectionStart, editor.selectionEnd, 'end');
+      editor.focus({ preventScroll: true });
       updatePreview();
     }
   });
@@ -375,17 +371,10 @@ function closeSlashMenu() {
 function insertSlashItem(item) {
   if (slashStartIndex === -1) return;
   const insertText = item.getAttribute('data-insert');
-  const text = editor.value;
-  const before = text.substring(0, slashStartIndex);
-  const after = text.substring(editor.selectionEnd);
   
-  editor.value = before + insertText + after;
+  editor.setRangeText(insertText, slashStartIndex, editor.selectionEnd, 'end');
+  editor.focus({ preventScroll: true });
   updatePreview();
-  
-  const newPos = slashStartIndex + insertText.length;
-  editor.focus();
-  editor.selectionStart = newPos;
-  editor.selectionEnd = newPos;
   
   closeSlashMenu();
 }
