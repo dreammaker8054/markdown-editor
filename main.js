@@ -11,7 +11,70 @@ const editorContainer = document.getElementById('editor-container');
 const btnTheme = document.getElementById('btn-theme');
 const themeIcon = document.getElementById('theme-icon');
 
-// Configure marked with highlight.js
+// Configure marked with highlight.js and custom GFM Alert renderer
+marked.use({
+  renderer: {
+    blockquote(token) {
+      const text = token.text || '';
+      const match = text.match(/^\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION|INFO)\]/i);
+      
+      if (match) {
+        const type = match[1].toUpperCase();
+        let contentHtml = this.parser.parse(token.tokens);
+        
+        // Remove the [!TYPE] marker text from rendered output
+        contentHtml = contentHtml.replace(/\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION|INFO)\]/gi, '');
+        
+        let title = type;
+        let icon = 'info';
+        let colorClass = '';
+        
+        switch(type) {
+          case 'NOTE':
+          case 'INFO':
+            title = 'INFO';
+            icon = 'info';
+            colorClass = 'border-sky-500 bg-sky-50 text-sky-900 dark:bg-sky-950/20 dark:text-sky-200';
+            break;
+          case 'TIP':
+            title = 'TIP';
+            icon = 'lightbulb';
+            colorClass = 'border-emerald-500 bg-emerald-50 text-emerald-900 dark:bg-emerald-950/20 dark:text-emerald-200';
+            break;
+          case 'IMPORTANT':
+            title = 'IMPORTANT';
+            icon = 'report';
+            colorClass = 'border-purple-500 bg-purple-50 text-purple-900 dark:bg-purple-950/20 dark:text-purple-200';
+            break;
+          case 'WARNING':
+            title = 'WARNING';
+            icon = 'warning';
+            colorClass = 'border-amber-500 bg-amber-50 text-amber-900 dark:bg-amber-950/20 dark:text-amber-200';
+            break;
+          case 'CAUTION':
+            title = 'CAUTION';
+            icon = 'dangerous';
+            colorClass = 'border-rose-500 bg-rose-50 text-rose-900 dark:bg-rose-950/20 dark:text-rose-200';
+            break;
+        }
+        
+        return `
+          <div class="alert-box border-l-4 p-4 my-4 rounded-r-md ${colorClass} not-prose">
+            <div class="flex items-center gap-2 font-bold mb-1 text-sm tracking-wide uppercase">
+              <span class="material-symbols-outlined text-lg">${icon}</span>
+              <span>${title}</span>
+            </div>
+            <div class="alert-content text-sm leading-relaxed">${contentHtml}</div>
+          </div>
+        `;
+      }
+      
+      const contentHtml = this.parser.parse(token.tokens);
+      return `<blockquote class="border-l-4 border-slate-300 dark:border-slate-700 pl-4 py-1 my-4 italic text-slate-600 dark:text-slate-400">${contentHtml}</blockquote>`;
+    }
+  }
+});
+
 marked.setOptions({
   highlight: function (code, lang) {
     const language = hljs.getLanguage(lang) ? lang : 'plaintext';

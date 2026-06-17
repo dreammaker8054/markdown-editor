@@ -84,3 +84,20 @@
   border-left-color: #4b5563;
 }
 
+/* GFM Alert Box Styles */
+.alert-box .alert-content p {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  color: inherit;
+}
+.alert-box .alert-content p:first-of-type {
+  margin-top: 0;
+}
+.alert-box .alert-content p:last-of-type {
+  margin-bottom: 0;
+}
+.alert-box .material-symbols-outlined {
+  vertical-align: middle;
+}
+
+
