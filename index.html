@@ -130,7 +130,7 @@
             .mobile-bottom-nav { display: none; }
         }
     </style>
-  <script type="module" crossorigin src="/markdown-editor/assets/main-BMUPZDCr.js"></script>
+  <script type="module" crossorigin src="/markdown-editor/assets/main-C-7R3VoX.js"></script>
   <link rel="stylesheet" crossorigin href="/markdown-editor/assets/main-DDVD8Go0.css">
 </head>
 <body class="bg-background text-on-background dark:bg-slate-950 dark:text-slate-50 font-body-ui h-screen overflow-hidden flex flex-row">
@@ -206,6 +206,14 @@
 <span class="material-symbols-outlined text-on-surface-variant dark:text-slate-400 group-hover:text-primary dark:group-hover:text-primary">format_list_numbered</span>
 <span class="text-[10px] text-outline dark:text-slate-500 font-bold">번호</span>
 </button>
+<button id="btn-indent" class="p-2 hover:bg-surface-container-low dark:hover:bg-slate-800 rounded transition-colors flex flex-col items-center" title="들여쓰기 (Tab)">
+<span class="material-symbols-outlined text-on-surface-variant dark:text-slate-400 hover:text-primary dark:hover:text-primary">format_indent_increase</span>
+<span class="text-[10px] text-outline dark:text-slate-500 font-bold">들여쓰기</span>
+</button>
+<button id="btn-outdent" class="p-2 hover:bg-surface-container-low dark:hover:bg-slate-800 rounded transition-colors flex flex-col items-center" title="내어쓰기 (Shift+Tab)">
+<span class="material-symbols-outlined text-on-surface-variant dark:text-slate-400 hover:text-primary dark:hover:text-primary">format_indent_decrease</span>
+<span class="text-[10px] text-outline dark:text-slate-500 font-bold">내어쓰기</span>
+</button>
 </div>
 <div class="flex items-center gap-1 pr-2 border-r border-outline-variant dark:border-slate-700 mr-1">
 <button class="p-2 hover:bg-surface-container-low dark:hover:bg-slate-800 rounded transition-colors flex flex-col items-center group">
@@ -218,10 +226,17 @@
 </button>
 </div>
 <div class="flex items-center gap-1 pr-2 border-r border-outline-variant dark:border-slate-700 mr-1">
-<button class="p-2 hover:bg-surface-container-low dark:hover:bg-slate-800 rounded transition-colors flex flex-col items-center group">
-<span class="material-symbols-outlined text-on-surface-variant dark:text-slate-400 group-hover:text-primary dark:group-hover:text-primary">title</span>
+<div class="relative inline-block text-left">
+<button id="btn-header-menu" class="p-2 hover:bg-surface-container-low dark:hover:bg-slate-800 rounded transition-colors flex flex-col items-center" title="제목 스타일 선택">
+<span class="material-symbols-outlined text-on-surface-variant dark:text-slate-400 hover:text-primary dark:hover:text-primary">title</span>
 <span class="text-[10px] text-outline dark:text-slate-500 font-bold">제목</span>
 </button>
+<div id="header-dropdown" class="hidden absolute left-0 mt-1 w-28 bg-white dark:bg-slate-800 border border-outline-variant dark:border-slate-700 shadow-lg rounded-lg py-1 z-50">
+  <button class="header-option w-full text-left px-3 py-1.5 text-xs font-semibold hover:bg-surface-container-low dark:hover:bg-slate-700 text-on-surface dark:text-slate-200" data-level="1">제목 1 (H1)</button>
+  <button class="header-option w-full text-left px-3 py-1.5 text-xs font-semibold hover:bg-surface-container-low dark:hover:bg-slate-700 text-on-surface dark:text-slate-200" data-level="2">제목 2 (H2)</button>
+  <button class="header-option w-full text-left px-3 py-1.5 text-xs font-semibold hover:bg-surface-container-low dark:hover:bg-slate-700 text-on-surface dark:text-slate-200" data-level="3">제목 3 (H3)</button>
+</div>
+</div>
 <button class="p-2 hover:bg-surface-container-low dark:hover:bg-slate-800 rounded transition-colors flex flex-col items-center group">
 <span class="material-symbols-outlined text-on-surface-variant dark:text-slate-400 group-hover:text-primary dark:group-hover:text-primary">checklist</span>
 <span class="text-[10px] text-outline dark:text-slate-500 font-bold">할일</span>
