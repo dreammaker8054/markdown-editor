@@ -148,4 +148,4 @@ greet('World');
 `,n-1)+1,a=t.indexOf(`
 `,r);a===-1&&(a=t.length);let o=t.substring(i,a).split(`
 `),s=[],c=0;e===`indent`?s=o.map(e=>(c+=2,`  `+e)):e===`outdent`&&(s=o.map(e=>e.startsWith(`  `)?(c-=2,e.substring(2)):e.startsWith(`	`)||e.startsWith(` `)?(--c,e.substring(1)):e));let l=s.join(`
-`);$.setRangeText(l,i,a,`select`),$.setSelectionRange(Math.max(i,n+(e===`indent`?2:-2)),Math.max(i,r+c)),$.focus({preventScroll:!0}),eo()}Za&&Za.addEventListener(`click`,()=>Do(`indent`)),Qa&&Qa.addEventListener(`click`,()=>Do(`outdent`));
+`);$.setRangeText(l,i,a,`select`),$.setSelectionRange(Math.max(i,n+(e===`indent`?2:-2)),Math.max(i,r+c)),$.focus({preventScroll:!0}),eo()}Za&&Za.addEventListener(`click`,()=>Do(`indent`)),Qa&&Qa.addEventListener(`click`,()=>Do(`outdent`)),`serviceWorker`in navigator&&window.addEventListener(`load`,()=>{navigator.serviceWorker.register(`./sw.js`).then(e=>{console.log(`ServiceWorker registration successful with scope: `,e.scope)}).catch(e=>{console.error(`ServiceWorker registration failed: `,e)})});
