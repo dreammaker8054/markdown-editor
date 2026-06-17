@@ -10,6 +10,8 @@ const btnSplit = document.getElementById('btn-split');
 const editorContainer = document.getElementById('editor-container');
 const btnTheme = document.getElementById('btn-theme');
 const themeIcon = document.getElementById('theme-icon');
+const btnIndent = document.getElementById('btn-indent');
+const btnOutdent = document.getElementById('btn-outdent');
 
 // Configure marked with highlight.js and custom GFM Alert renderer
 marked.use({
@@ -462,6 +464,16 @@ editor.addEventListener('input', (e) => {
 });
 
 editor.addEventListener('keydown', (e) => {
+  if (e.key === 'Tab') {
+    e.preventDefault();
+    if (e.shiftKey) {
+      adjustIndentation('outdent');
+    } else {
+      adjustIndentation('indent');
+    }
+    return;
+  }
+  
   if (!slashMenuOpen) return;
   
   if (e.key === 'ArrowDown') {
@@ -551,4 +563,95 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
 });
 
 initTheme();
+
+// --- Title Level Dropdown ---
+const btnHeaderMenu = document.getElementById('btn-header-menu');
+const headerDropdown = document.getElementById('header-dropdown');
+
+if (btnHeaderMenu && headerDropdown) {
+  btnHeaderMenu.addEventListener('click', (e) => {
+    e.stopPropagation();
+    headerDropdown.classList.toggle('hidden');
+  });
+
+  document.querySelectorAll('.header-option').forEach(option => {
+    option.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const level = parseInt(option.getAttribute('data-level'), 10);
+      const hashes = '#'.repeat(level);
+      const insert = `\n${hashes} 제목 ${level}\n`;
+      
+      editor.setRangeText(insert, editor.selectionStart, editor.selectionEnd, 'end');
+      editor.focus({ preventScroll: true });
+      updatePreview();
+      headerDropdown.classList.add('hidden');
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!headerDropdown.classList.contains('hidden') && !btnHeaderMenu.contains(e.target) && !headerDropdown.contains(e.target)) {
+      headerDropdown.classList.add('hidden');
+    }
+  });
+}
+
+// --- List Indentation Control ---
+function adjustIndentation(direction) {
+  const text = editor.value;
+  const start = editor.selectionStart;
+  const end = editor.selectionEnd;
+  
+  // Find lines starting and ending boundaries
+  let lineStart = text.lastIndexOf('\n', start - 1) + 1;
+  let lineEnd = text.indexOf('\n', end);
+  if (lineEnd === -1) lineEnd = text.length;
+  
+  const selectedLinesText = text.substring(lineStart, lineEnd);
+  const lines = selectedLinesText.split('\n');
+  
+  let modifiedLines = [];
+  let diff = 0; // Track change in length to adjust selection
+  
+  if (direction === 'indent') {
+    modifiedLines = lines.map(line => {
+      diff += 2;
+      return '  ' + line;
+    });
+  } else if (direction === 'outdent') {
+    modifiedLines = lines.map(line => {
+      if (line.startsWith('  ')) {
+        diff -= 2;
+        return line.substring(2);
+      } else if (line.startsWith('\t')) {
+        diff -= 1;
+        return line.substring(1);
+      } else if (line.startsWith(' ')) {
+        diff -= 1;
+        return line.substring(1);
+      }
+      return line;
+    });
+  }
+  
+  const newText = modifiedLines.join('\n');
+  editor.setRangeText(newText, lineStart, lineEnd, 'select');
+  
+  // Re-select range proportionally
+  editor.setSelectionRange(
+    Math.max(lineStart, start + (direction === 'indent' ? 2 : -2)),
+    Math.max(lineStart, end + diff)
+  );
+  
+  editor.focus({ preventScroll: true });
+  updatePreview();
+}
+
+if (btnIndent) {
+  btnIndent.addEventListener('click', () => adjustIndentation('indent'));
+}
+
+if (btnOutdent) {
+  btnOutdent.addEventListener('click', () => adjustIndentation('outdent'));
+}
+
 
