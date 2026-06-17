@@ -8,6 +8,8 @@ const btnEdit = document.getElementById('btn-edit');
 const btnPreview = document.getElementById('btn-preview');
 const btnSplit = document.getElementById('btn-split');
 const editorContainer = document.getElementById('editor-container');
+const btnTheme = document.getElementById('btn-theme');
+const themeIcon = document.getElementById('theme-icon');
 
 // Configure marked with highlight.js
 marked.setOptions({
@@ -85,8 +87,8 @@ editor.addEventListener('input', updatePreview);
 
 // Mode Toggle
 function setMode(mode) {
-  const activeClass = "px-3 py-1 text-sm font-medium bg-white shadow-sm rounded-md text-on-surface";
-  const inactiveClass = "px-3 py-1 text-sm font-medium text-outline hover:text-on-surface transition-colors";
+  const activeClass = "px-3 py-1 text-sm font-medium bg-white dark:bg-slate-700 shadow-sm rounded-md text-on-surface dark:text-slate-50";
+  const inactiveClass = "px-3 py-1 text-sm font-medium text-outline hover:text-on-surface dark:hover:text-slate-200 transition-colors";
 
   if(btnEdit) btnEdit.className = mode === 'edit' ? activeClass : inactiveClass;
   if(btnPreview) btnPreview.className = mode === 'preview' ? activeClass : inactiveClass;
@@ -443,3 +445,47 @@ document.addEventListener('click', (e) => {
     closeSlashMenu();
   }
 });
+
+// Theme Toggle Functionality
+function initTheme() {
+  const savedTheme = localStorage.getItem('theme');
+  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+    document.documentElement.classList.add('dark');
+    if (themeIcon) themeIcon.textContent = 'light_mode';
+  } else {
+    document.documentElement.classList.remove('dark');
+    if (themeIcon) themeIcon.textContent = 'dark_mode';
+  }
+}
+
+if (btnTheme) {
+  btnTheme.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    if (isDark) {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+      if (themeIcon) themeIcon.textContent = 'dark_mode';
+    } else {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+      if (themeIcon) themeIcon.textContent = 'light_mode';
+    }
+  });
+}
+
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  if (!localStorage.getItem('theme')) {
+    if (e.matches) {
+      document.documentElement.classList.add('dark');
+      if (themeIcon) themeIcon.textContent = 'light_mode';
+    } else {
+      document.documentElement.classList.remove('dark');
+      if (themeIcon) themeIcon.textContent = 'dark_mode';
+    }
+  }
+});
+
+initTheme();
+

@@ -65,3 +65,22 @@
 .prose blockquote p:last-of-type::after {
   content: none !important;
 }
+
+/* Custom Dark Mode Adjustments */
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #334155; /* slate-700 */
+}
+
+.markdown-body code {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.dark .markdown-body code {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.dark .markdown-body blockquote {
+  color: #9ca3af;
+  border-left-color: #4b5563;
+}
+
