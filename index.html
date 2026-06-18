@@ -134,7 +134,7 @@
     <meta name="theme-color" content="#003ec7">
     <link rel="apple-touch-icon" href="./icon-192.png">
     <link rel="icon" type="image/png" href="./icon-192.png">
-  <script type="module" crossorigin src="/markdown-editor/assets/main-CKmKcRL2.js"></script>
+  <script type="module" crossorigin src="/markdown-editor/assets/main-BYiGxviM.js"></script>
   <link rel="stylesheet" crossorigin href="/markdown-editor/assets/main-DDVD8Go0.css">
 </head>
 <body class="bg-background text-on-background dark:bg-slate-950 dark:text-slate-50 font-body-ui h-screen overflow-hidden flex flex-row">
@@ -191,6 +191,16 @@
 <main class="flex-1 flex flex-col overflow-hidden">
 <!-- GUI Rich Toolbar -->
 <div class="bg-surface-container-lowest dark:bg-slate-900 border-b border-outline-variant dark:border-slate-800 px-4 py-2 flex items-center gap-1 overflow-x-auto custom-scrollbar z-30 relative">
+<div class="flex items-center gap-1 pr-2 border-r border-outline-variant dark:border-slate-700 mr-1">
+<button id="btn-undo" class="p-2 hover:bg-surface-container-low dark:hover:bg-slate-800 rounded transition-colors flex flex-col items-center group" title="실행 취소 (Ctrl+Z)">
+<span class="material-symbols-outlined text-on-surface-variant dark:text-slate-400 group-hover:text-primary dark:group-hover:text-primary">undo</span>
+<span class="text-[10px] text-outline dark:text-slate-500 font-bold">실행 취소</span>
+</button>
+<button id="btn-redo" class="p-2 hover:bg-surface-container-low dark:hover:bg-slate-800 rounded transition-colors flex flex-col items-center group" title="실행 복귀 (Ctrl+Y)">
+<span class="material-symbols-outlined text-on-surface-variant dark:text-slate-400 group-hover:text-primary dark:group-hover:text-primary">redo</span>
+<span class="text-[10px] text-outline dark:text-slate-500 font-bold">실행 복귀</span>
+</button>
+</div>
 <div class="flex items-center gap-1 pr-2 border-r border-outline-variant dark:border-slate-700 mr-1">
 <button class="p-2 hover:bg-surface-container-low dark:hover:bg-slate-800 rounded transition-colors flex flex-col items-center group">
 <span class="material-symbols-outlined text-on-surface-variant dark:text-slate-400 group-hover:text-primary dark:group-hover:text-primary">format_bold</span>
