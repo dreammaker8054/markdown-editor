@@ -191,16 +191,6 @@
 <!-- GUI Rich Toolbar -->
 <div class="bg-surface-container-lowest dark:bg-slate-900 border-b border-outline-variant dark:border-slate-800 px-4 py-2 flex items-center gap-1 overflow-x-auto custom-scrollbar z-30 relative">
 <div class="flex items-center gap-1 pr-2 border-r border-outline-variant dark:border-slate-700 mr-1">
-<button id="btn-undo" class="p-2 hover:bg-surface-container-low dark:hover:bg-slate-800 rounded transition-colors flex flex-col items-center group" title="실행 취소 (Ctrl+Z)">
-<span class="material-symbols-outlined text-on-surface-variant dark:text-slate-400 group-hover:text-primary dark:group-hover:text-primary">undo</span>
-<span class="text-[10px] text-outline dark:text-slate-500 font-bold">실행 취소</span>
-</button>
-<button id="btn-redo" class="p-2 hover:bg-surface-container-low dark:hover:bg-slate-800 rounded transition-colors flex flex-col items-center group" title="실행 복귀 (Ctrl+Y)">
-<span class="material-symbols-outlined text-on-surface-variant dark:text-slate-400 group-hover:text-primary dark:group-hover:text-primary">redo</span>
-<span class="text-[10px] text-outline dark:text-slate-500 font-bold">실행 복귀</span>
-</button>
-</div>
-<div class="flex items-center gap-1 pr-2 border-r border-outline-variant dark:border-slate-700 mr-1">
 <button class="p-2 hover:bg-surface-container-low dark:hover:bg-slate-800 rounded transition-colors flex flex-col items-center group">
 <span class="material-symbols-outlined text-on-surface-variant dark:text-slate-400 group-hover:text-primary dark:group-hover:text-primary">format_bold</span>
 <span class="text-[10px] text-outline dark:text-slate-500 font-bold">굵게</span>
@@ -252,7 +242,7 @@
 <span class="text-[10px] text-outline dark:text-slate-500 font-bold">구분선</span>
 </button>
 </div>
-<div class="flex items-center gap-1">
+<div class="flex items-center gap-1 pr-2 border-r border-outline-variant dark:border-slate-700 mr-1">
 <button class="p-2 hover:bg-surface-container-low dark:hover:bg-slate-800 rounded transition-colors flex flex-col items-center group">
 <span class="material-symbols-outlined text-on-surface-variant dark:text-slate-400 group-hover:text-primary dark:group-hover:text-primary">format_quote</span>
 <span class="text-[10px] text-outline dark:text-slate-500 font-bold">인용</span>
@@ -268,6 +258,16 @@
 <button class="p-2 hover:bg-surface-container-low dark:hover:bg-slate-800 rounded transition-colors flex flex-col items-center group">
 <span class="material-symbols-outlined text-on-surface-variant dark:text-slate-400 group-hover:text-primary dark:group-hover:text-primary">unfold_more</span>
 <span class="text-[10px] text-outline dark:text-slate-500 font-bold">토글</span>
+</button>
+</div>
+<div class="flex items-center gap-1">
+<button id="btn-undo" class="p-2 hover:bg-surface-container-low dark:hover:bg-slate-800 rounded transition-colors flex flex-col items-center group" title="실행 취소 (Ctrl+Z)">
+<span class="material-symbols-outlined text-on-surface-variant dark:text-slate-400 group-hover:text-primary dark:group-hover:text-primary">undo</span>
+<span class="text-[10px] text-outline dark:text-slate-500 font-bold">실행 취소</span>
+</button>
+<button id="btn-redo" class="p-2 hover:bg-surface-container-low dark:hover:bg-slate-800 rounded transition-colors flex flex-col items-center group" title="실행 복귀 (Ctrl+Y)">
+<span class="material-symbols-outlined text-on-surface-variant dark:text-slate-400 group-hover:text-primary dark:group-hover:text-primary">redo</span>
+<span class="text-[10px] text-outline dark:text-slate-500 font-bold">실행 복귀</span>
 </button>
 </div>
 </div>
