@@ -12,6 +12,114 @@ const btnTheme = document.getElementById('btn-theme');
 const themeIcon = document.getElementById('theme-icon');
 const btnIndent = document.getElementById('btn-indent');
 const btnOutdent = document.getElementById('btn-outdent');
+const btnUndo = document.getElementById('btn-undo');
+const btnRedo = document.getElementById('btn-redo');
+
+class HistoryManager {
+  constructor(editor, maxHistory = 100) {
+    this.editor = editor;
+    this.maxHistory = maxHistory;
+    this.undoStack = [];
+    this.redoStack = [];
+    this.isApplying = false;
+    this.debounceTimer = null;
+    this.lastValue = editor.value;
+  }
+  
+  saveState() {
+    return {
+      value: this.editor.value,
+      selectionStart: this.editor.selectionStart,
+      selectionEnd: this.editor.selectionEnd
+    };
+  }
+  
+  restoreState(state) {
+    this.isApplying = true;
+    this.editor.value = state.value;
+    this.editor.setSelectionRange(state.selectionStart, state.selectionEnd);
+    updatePreview(); 
+    this.lastValue = state.value;
+    this.isApplying = false;
+    this.updateButtonStates();
+  }
+  
+  push(state = this.saveState()) {
+    if (this.isApplying) return;
+    
+    if (this.undoStack.length > 0) {
+      const last = this.undoStack[this.undoStack.length - 1];
+      if (last.value === state.value) {
+        last.selectionStart = state.selectionStart;
+        last.selectionEnd = state.selectionEnd;
+        return;
+      }
+    }
+    
+    this.undoStack.push(state);
+    if (this.undoStack.length > this.maxHistory) {
+      this.undoStack.shift();
+    }
+    
+    this.redoStack = [];
+    this.lastValue = state.value;
+    this.updateButtonStates();
+  }
+  
+  undo() {
+    if (this.undoStack.length <= 1) return;
+    
+    const current = this.saveState();
+    this.redoStack.push(current);
+    
+    this.undoStack.pop();
+    const prevState = this.undoStack[this.undoStack.length - 1];
+    this.restoreState(prevState);
+  }
+  
+  redo() {
+    if (this.redoStack.length === 0) return;
+    
+    const nextState = this.redoStack.pop();
+    this.undoStack.push(nextState);
+    this.restoreState(nextState);
+  }
+  
+  updateButtonStates() {
+    if (btnUndo) {
+      const canUndo = this.undoStack.length > 1;
+      btnUndo.disabled = !canUndo;
+      btnUndo.style.opacity = canUndo ? '1' : '0.4';
+      btnUndo.style.cursor = canUndo ? 'pointer' : 'not-allowed';
+    }
+    if (btnRedo) {
+      const canRedo = this.redoStack.length > 0;
+      btnRedo.disabled = !canRedo;
+      btnRedo.style.opacity = canRedo ? '1' : '0.4';
+      btnRedo.style.cursor = canRedo ? 'pointer' : 'not-allowed';
+    }
+  }
+
+  handleInput() {
+    if (this.isApplying) return;
+    
+    const currentValue = this.editor.value;
+    const diff = Math.abs(currentValue.length - this.lastValue.length);
+    
+    const lastChar = currentValue.slice(-1);
+    if (/\s/.test(lastChar) || diff > 5) {
+      clearTimeout(this.debounceTimer);
+      this.push();
+    } else {
+      clearTimeout(this.debounceTimer);
+      this.debounceTimer = setTimeout(() => {
+        this.push();
+      }, 500);
+    }
+  }
+}
+
+let historyManager;
 
 // Configure marked with highlight.js and custom GFM Alert renderer
 marked.use({
@@ -147,8 +255,27 @@ async function updatePreview() {
 updatePreview();
 setMode('split'); // Set default mode to split
 
+// History Initialisation
+historyManager = new HistoryManager(editor);
+historyManager.push();
+
+if (btnUndo) {
+  btnUndo.addEventListener('click', () => {
+    historyManager.undo();
+  });
+}
+
+if (btnRedo) {
+  btnRedo.addEventListener('click', () => {
+    historyManager.redo();
+  });
+}
+
 // Event listeners
-editor.addEventListener('input', updatePreview);
+editor.addEventListener('input', () => {
+  updatePreview();
+  historyManager.handleInput();
+});
 
 // Mode Toggle
 function setMode(mode) {
@@ -336,6 +463,7 @@ document.querySelectorAll('.group').forEach(btn => {
       editor.setRangeText(insert, editor.selectionStart, editor.selectionEnd, 'end');
       editor.focus({ preventScroll: true });
       updatePreview();
+      if (historyManager) historyManager.push();
     }
   });
 });
@@ -442,6 +570,7 @@ function insertSlashItem(item) {
   editor.setRangeText(insertText, slashStartIndex, editor.selectionEnd, 'end');
   editor.focus({ preventScroll: true });
   updatePreview();
+  if (historyManager) historyManager.push();
   
   closeSlashMenu();
 }
@@ -464,6 +593,26 @@ editor.addEventListener('input', (e) => {
 });
 
 editor.addEventListener('keydown', (e) => {
+  // --- Undo/Redo Shortcuts ---
+  const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+  const isCmdOrCtrl = isMac ? e.metaKey : e.ctrlKey;
+  
+  if (isCmdOrCtrl && e.key.toLowerCase() === 'z') {
+    e.preventDefault();
+    if (e.shiftKey) {
+      if (historyManager) historyManager.redo();
+    } else {
+      if (historyManager) historyManager.undo();
+    }
+    return;
+  }
+  
+  if ((isCmdOrCtrl && e.key.toLowerCase() === 'y') || (isMac && isCmdOrCtrl && e.shiftKey && e.key.toLowerCase() === 'z')) {
+    e.preventDefault();
+    if (historyManager) historyManager.redo();
+    return;
+  }
+
   if (e.key === 'Tab') {
     e.preventDefault();
     if (e.shiftKey) {
@@ -592,6 +741,7 @@ if (btnHeaderMenu && headerDropdown) {
       editor.setRangeText(insert, editor.selectionStart, editor.selectionEnd, 'end');
       editor.focus({ preventScroll: true });
       updatePreview();
+      if (historyManager) historyManager.push();
       headerDropdown.classList.add('hidden');
     });
   });
@@ -652,6 +802,7 @@ function adjustIndentation(direction) {
   
   editor.focus({ preventScroll: true });
   updatePreview();
+  if (historyManager) historyManager.push();
 }
 
 if (btnIndent) {
