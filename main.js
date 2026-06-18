@@ -826,5 +826,26 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+// --- Changelog Modal Control ---
+const btnChangelog = document.getElementById('btn-changelog');
+const changelogModal = document.getElementById('changelog-modal');
+const changelogBackdrop = document.getElementById('changelog-backdrop');
+const btnCloseChangelog = document.getElementById('btn-close-changelog');
+const btnCloseChangelogX = document.getElementById('btn-close-changelog-x');
+
+if (btnChangelog && changelogModal) {
+  const openModal = () => {
+    changelogModal.classList.remove('hidden');
+  };
+  const closeModal = () => {
+    changelogModal.classList.add('hidden');
+  };
+
+  btnChangelog.addEventListener('click', openModal);
+  if (btnCloseChangelog) btnCloseChangelog.addEventListener('click', closeModal);
+  if (btnCloseChangelogX) btnCloseChangelogX.addEventListener('click', closeModal);
+  if (changelogBackdrop) changelogBackdrop.addEventListener('click', closeModal);
+}
+
 
 
