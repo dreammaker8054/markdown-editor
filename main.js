@@ -571,7 +571,15 @@ const headerDropdown = document.getElementById('header-dropdown');
 if (btnHeaderMenu && headerDropdown) {
   btnHeaderMenu.addEventListener('click', (e) => {
     e.stopPropagation();
-    headerDropdown.classList.toggle('hidden');
+    const isHidden = headerDropdown.classList.contains('hidden');
+    if (isHidden) {
+      const rect = btnHeaderMenu.getBoundingClientRect();
+      headerDropdown.style.top = `${rect.bottom}px`;
+      headerDropdown.style.left = `${rect.left}px`;
+      headerDropdown.classList.remove('hidden');
+    } else {
+      headerDropdown.classList.add('hidden');
+    }
   });
 
   document.querySelectorAll('.header-option').forEach(option => {

@@ -229,17 +229,10 @@
 </button>
 </div>
 <div class="flex items-center gap-1 pr-2 border-r border-outline-variant dark:border-slate-700 mr-1">
-<div class="relative inline-block text-left">
 <button id="btn-header-menu" class="p-2 hover:bg-surface-container-low dark:hover:bg-slate-800 rounded transition-colors flex flex-col items-center" title="제목 스타일 선택">
 <span class="material-symbols-outlined text-on-surface-variant dark:text-slate-400 hover:text-primary dark:hover:text-primary">title</span>
 <span class="text-[10px] text-outline dark:text-slate-500 font-bold">제목</span>
 </button>
-<div id="header-dropdown" class="hidden absolute left-0 mt-1 w-28 bg-white dark:bg-slate-800 border border-outline-variant dark:border-slate-700 shadow-lg rounded-lg py-1 z-50">
-  <button class="header-option w-full text-left px-3 py-1.5 text-xs font-semibold hover:bg-surface-container-low dark:hover:bg-slate-700 text-on-surface dark:text-slate-200" data-level="1">제목 1 (H1)</button>
-  <button class="header-option w-full text-left px-3 py-1.5 text-xs font-semibold hover:bg-surface-container-low dark:hover:bg-slate-700 text-on-surface dark:text-slate-200" data-level="2">제목 2 (H2)</button>
-  <button class="header-option w-full text-left px-3 py-1.5 text-xs font-semibold hover:bg-surface-container-low dark:hover:bg-slate-700 text-on-surface dark:text-slate-200" data-level="3">제목 3 (H3)</button>
-</div>
-</div>
 <button class="p-2 hover:bg-surface-container-low dark:hover:bg-slate-800 rounded transition-colors flex flex-col items-center group">
 <span class="material-symbols-outlined text-on-surface-variant dark:text-slate-400 group-hover:text-primary dark:group-hover:text-primary">checklist</span>
 <span class="text-[10px] text-outline dark:text-slate-500 font-bold">할일</span>
@@ -342,6 +335,12 @@
     <span class="material-symbols-outlined text-outline dark:text-slate-400">unfold_more</span>
     <div class="flex flex-col"><span class="text-on-surface dark:text-slate-100 font-semibold text-sm">토글 목록</span><span class="text-xs text-outline dark:text-slate-400">접었다 펼 수 있는 목록</span></div>
   </button>
+</div>
+
+<div id="header-dropdown" class="hidden fixed w-28 bg-white dark:bg-slate-800 border border-outline-variant dark:border-slate-700 shadow-lg rounded-lg py-1 z-50">
+  <button class="header-option w-full text-left px-3 py-1.5 text-xs font-semibold hover:bg-surface-container-low dark:hover:bg-slate-700 text-on-surface dark:text-slate-200" data-level="1">제목 1 (H1)</button>
+  <button class="header-option w-full text-left px-3 py-1.5 text-xs font-semibold hover:bg-surface-container-low dark:hover:bg-slate-700 text-on-surface dark:text-slate-200" data-level="2">제목 2 (H2)</button>
+  <button class="header-option w-full text-left px-3 py-1.5 text-xs font-semibold hover:bg-surface-container-low dark:hover:bg-slate-700 text-on-surface dark:text-slate-200" data-level="3">제목 3 (H3)</button>
 </div>
 
 </main>
