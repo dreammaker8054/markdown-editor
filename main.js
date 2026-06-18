@@ -162,19 +162,19 @@ function setMode(mode) {
   if (mode === 'edit') {
     editor.classList.remove('hidden');
     preview.classList.add('hidden');
-    editorContainer.classList.remove('max-w-6xl');
-    editorContainer.classList.add('max-w-3xl');
+    editorContainer.classList.remove('max-w-full');
+    editorContainer.classList.add('max-w-5xl');
   } else if (mode === 'preview') {
     editor.classList.add('hidden');
     preview.classList.remove('hidden');
-    editorContainer.classList.remove('max-w-6xl');
-    editorContainer.classList.add('max-w-3xl');
+    editorContainer.classList.remove('max-w-full');
+    editorContainer.classList.add('max-w-5xl');
     updatePreview();
   } else if (mode === 'split') {
     editor.classList.remove('hidden');
     preview.classList.remove('hidden');
-    editorContainer.classList.remove('max-w-3xl');
-    editorContainer.classList.add('max-w-6xl');
+    editorContainer.classList.remove('max-w-5xl');
+    editorContainer.classList.add('max-w-full');
     updatePreview();
   }
 }
