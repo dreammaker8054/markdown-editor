@@ -678,7 +678,8 @@ slashItems.forEach(item => {
 });
 
 document.addEventListener('click', (e) => {
-  if (slashMenuOpen && e.target !== editor && !slashMenu.contains(e.target)) {
+  const path = e.composedPath();
+  if (slashMenuOpen && e.target !== editor && !path.includes(slashMenu)) {
     closeSlashMenu();
   }
 });
@@ -766,7 +767,8 @@ if (btnHeaderMenu && headerDropdown) {
   });
 
   document.addEventListener('click', (e) => {
-    if (!headerDropdown.classList.contains('hidden') && !btnHeaderMenu.contains(e.target) && !headerDropdown.contains(e.target)) {
+    const path = e.composedPath();
+    if (!headerDropdown.classList.contains('hidden') && !path.includes(btnHeaderMenu) && !path.includes(headerDropdown)) {
       headerDropdown.classList.add('hidden');
     }
   });
@@ -1642,7 +1644,8 @@ if (btnEmoji && emojiDropdown) {
   }
 
   document.addEventListener('click', (e) => {
-    if (!emojiDropdown.classList.contains('hidden') && !btnEmoji.contains(e.target) && !emojiDropdown.contains(e.target)) {
+    const path = e.composedPath();
+    if (!emojiDropdown.classList.contains('hidden') && !path.includes(btnEmoji) && !path.includes(emojiDropdown)) {
       emojiDropdown.classList.add('hidden');
     }
   });
