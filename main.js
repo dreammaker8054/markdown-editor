@@ -729,11 +729,17 @@ initTheme();
 // --- Title Level Dropdown ---
 const btnHeaderMenu = document.getElementById('btn-header-menu');
 const headerDropdown = document.getElementById('header-dropdown');
+const btnEmoji = document.getElementById('btn-emoji');
+const emojiDropdown = document.getElementById('emoji-dropdown');
 
 if (btnHeaderMenu && headerDropdown) {
   btnHeaderMenu.addEventListener('click', (e) => {
     e.stopPropagation();
     const isHidden = headerDropdown.classList.contains('hidden');
+    
+    // Close emoji dropdown if open
+    if (emojiDropdown) emojiDropdown.classList.add('hidden');
+    
     if (isHidden) {
       const rect = btnHeaderMenu.getBoundingClientRect();
       headerDropdown.style.top = `${rect.bottom}px`;
@@ -762,6 +768,613 @@ if (btnHeaderMenu && headerDropdown) {
   document.addEventListener('click', (e) => {
     if (!headerDropdown.classList.contains('hidden') && !btnHeaderMenu.contains(e.target) && !headerDropdown.contains(e.target)) {
       headerDropdown.classList.add('hidden');
+    }
+  });
+}
+
+// --- Emoji List Dropdown (v2.0.0 redesigned) ---
+const emojiCategories = [
+  {
+    id: 'smileys',
+    name: '표정',
+    icon: '😀',
+    emojis: [
+      { char: '😀', tags: '웃음 기쁨 행복 smile happy' },
+      { char: '😃', tags: '웃음 기쁨 행복 smile happy' },
+      { char: '😄', tags: '웃음 기쁨 행복 smile happy' },
+      { char: '😁', tags: '미소 기쁨 행복 smile happy' },
+      { char: '😆', tags: '미소 눈웃음 기쁨 smile happy' },
+      { char: '😅', tags: '땀 식은땀 안도 smile sweat' },
+      { char: '😂', tags: '눈물 기쁨 폭소 lol laugh tear' },
+      { char: '🤣', tags: '웃음 폭소 데굴데굴 lol laugh' },
+      { char: '😊', tags: '미소 부끄럼 행복 smile happy' },
+      { char: '😇', tags: '천사 착함 순수 angel halo' },
+      { char: '🙂', tags: '미소 안도 smile' },
+      { char: '🙃', tags: '거꾸로 반전 upside-down' },
+      { char: '😉', tags: '윙크 위트 wink' },
+      { char: '😌', tags: '안도 편안 relief' },
+      { char: '😍', tags: '하트 눈사랑 하트눈 love heart eyes' },
+      { char: '🥰', tags: '사랑 하트 부끄럼 love hearts' },
+      { char: '😘', tags: '뽀뽀 사랑 kiss love' },
+      { char: '😗', tags: '뽀뽀 kiss' },
+      { char: '😙', tags: '뽀뽀 미소 kiss' },
+      { char: '😚', tags: '뽀뽀 눈감음 kiss' },
+      { char: '😋', tags: '맛있다 장난 메롱 yummy tongue' },
+      { char: '😛', tags: '메롱 장난 tongue' },
+      { char: '😝', tags: '메롱 눈감음 장난 tongue' },
+      { char: '😜', tags: '메롱 윙크 장난 tongue wink' },
+      { char: '🤪', tags: '장난 미치광이 crazy' },
+      { char: '🤨', tags: '의심 생각 brow' },
+      { char: '🧐', tags: '분석 돋보기 안경 monocle' },
+      { char: '🤓', tags: '범생이 안경 안경잡이 nerd' },
+      { char: '😎', tags: '선글라스 멋짐 여유 cool glasses' },
+      { char: '🥸', tags: '변장 가면 disguise' },
+      { char: '🤩', tags: '별눈 기쁨 star eyes' },
+      { char: '🥳', tags: '파티 축하 축제 party celebrate' },
+      { char: '😏', tags: '비웃음 썩소 smirk' },
+      { char: '😒', tags: '불만 시큰둥 unamused' },
+      { char: '😞', tags: '실망 우울 속상 disappointed' },
+      { char: '😔', tags: '우울 생각 슬픔 pensive' },
+      { char: '😟', tags: '걱정 불안 worried' },
+      { char: '😕', tags: '혼란 의아 confused' },
+      { char: '🙁', tags: '슬픔 불만 frown' },
+      { char: '☹️', tags: '슬픔 불만 frown' },
+      { char: '😣', tags: '인내 괴로움 persevere' },
+      { char: '😖', tags: '괴로움 혼란 confounded' },
+      { char: '😫', tags: '피곤 짜증 tired' },
+      { char: '😩', tags: '피곤 힘듦 weary' },
+      { char: '🥺', tags: '부탁 아련 애원 눈물 pleading' },
+      { char: '😢', tags: '눈물 슬픔 cry' },
+      { char: '😭', tags: '대성통곡 눈물 슬픔 sob cry' },
+      { char: '😤', tags: '콧김 흥분 분노 triumph' },
+      { char: '😠', tags: '화남 분노 angry' },
+      { char: '😡', tags: '분노 화남 angry rage' },
+      { char: '🤬', tags: '욕설 분노 화남 curse swear' },
+      { char: '🤯', tags: '충격 머리 폭발 대박 explode mind' },
+      { char: '😳', tags: '당황 부끄럼 blush flush' },
+      { char: '🥵', tags: '덥다 열 더위 hot heat' },
+      { char: '🥶', tags: '춥다 얼어붙음 추위 cold ice' },
+      { char: '😱', tags: '공포 비명 충격 scream fear' },
+      { char: '😨', tags: '두려움 불안 fearful' },
+      { char: '😰', tags: '식은땀 걱정 두려움 anxious sweat' },
+      { char: '😥', tags: '안도 땀 슬픔 sad sweat' },
+      { char: '😓', tags: '땀 실망 걱정 sweat' }
+    ]
+  },
+  {
+    id: 'hands',
+    name: '신체',
+    icon: '👋',
+    emojis: [
+      { char: '👋', tags: '손 흔들기 안녕 인사 wave hello' },
+      { char: '🤚', tags: '등 뒤 손등 backhand' },
+      { char: '🖐️', tags: '손가락 펼치기 hand' },
+      { char: '✋', tags: '멈춰 정지 stop hand' },
+      { char: '🖖', tags: '발칸 인사 vulcan' },
+      { char: '👌', tags: '오케이 확인 ok' },
+      { char: '🤌', tags: '이탈리아 손짓 만두 pinching' },
+      { char: '🤏', tags: '조금 한 꼬집 pinch' },
+      { char: '✌️', tags: '브이 평화 victory peace' },
+      { char: '🤞', tags: '행운 손가락 cross' },
+      { char: '🫰', tags: '하트 손가락 k-heart' },
+      { char: '🤟', tags: '사랑해 rock-on love' },
+      { char: '🤘', tags: '락 메탈 하이 rock' },
+      { char: '🤙', tags: '전화해 call' },
+      { char: '👈', tags: '왼쪽 가리키기 left pointer' },
+      { char: '👉', tags: '오른쪽 가리키기 right pointer' },
+      { char: '👆', tags: '위 가리키기 up pointer' },
+      { char: '🖕', tags: '뻐큐 욕설 middle finger' },
+      { char: '👇', tags: '아래 가리키기 down pointer' },
+      { char: '☝️', tags: '검지 하나 point' },
+      { char: '👍', tags: '최고 따봉 좋아요 thumbs-up like' },
+      { char: '👎', tags: '싫어요 비추 thumbs-down dislike' },
+      { char: '✊', tags: '주먹 fist' },
+      { char: '👊', tags: '펀치 주먹 punch' },
+      { char: '🤛', tags: '왼쪽 주먹 fist-left' },
+      { char: '🤜', tags: '오른쪽 주먹 fist-right' },
+      { char: '👏', tags: '박수 짝짝짝 clap' },
+      { char: '🙌', tags: '만세 야호 celebrate hooray' },
+      { char: '👐', tags: '펼친 손 open' },
+      { char: '🤲', tags: '모은 손 palms' },
+      { char: '🤝', tags: '악수 협력 shake hands' },
+      { char: '🙏', tags: '기도 부탁 감사 고맙습니다 pray please thanks' },
+      { char: '✍️', tags: '글쓰기 펜 필기 write pen' },
+      { char: '💅', tags: '네일 매니큐어 nail' },
+      { char: '🤳', tags: '셀카 사진 selfie' },
+      { char: '💪', tags: '근육 힘 화이팅 muscle power strength' },
+      { char: '🧠', tags: '뇌 생각 지식 brain' },
+      { char: '🫀', tags: '심장 하트 장기 heart anatomical' },
+      { char: '👀', tags: '눈 감시 보기 eyes look see' },
+      { char: '👁️', tags: '눈 하나 eye see' },
+      { char: '🗣️', tags: '말하는 사람 speak talk' },
+      { char: '👤', tags: '사람 실루엣 silhouette' },
+      { char: '👥', tags: '사람들 실루엣 silhouettes' },
+      { char: '🫂', tags: '포옹 위로 허그 hug' }
+    ]
+  },
+  {
+    id: 'animals',
+    name: '동물',
+    icon: '🐱',
+    emojis: [
+      { char: '🐶', tags: '개 강아지 dog puppy' },
+      { char: '🐱', tags: '고양이 야옹이 cat kitty' },
+      { char: '🐭', tags: '쥐 마우스 mouse' },
+      { char: '🐹', tags: '햄스터 hamster' },
+      { char: '🐰', tags: '토끼 rabbit bunny' },
+      { char: '🦊', tags: '여우 fox' },
+      { char: '🐻', tags: '곰 bear' },
+      { char: '🐼', tags: '판다 panda' },
+      { char: '🐻‍❄️', tags: '북극곰 polar bear' },
+      { char: '🐨', tags: '코알라 koala' },
+      { char: '🐯', tags: '호랑이 tiger' },
+      { char: '🦁', tags: '사자 lion' },
+      { char: '🐮', tags: '소 cow' },
+      { char: '🐷', tags: '돼지 pig' },
+      { char: '🐸', tags: '개구리 frog' },
+      { char: '🐵', tags: '원숭이 monkey' },
+      { char: '🐔', tags: '닭 치킨 chicken' },
+      { char: '🐧', tags: '펭귄 penguin' },
+      { char: '🐦', tags: '새 bird' },
+      { char: '🐤', tags: '병아리 chick' },
+      { char: '🦆', tags: '오리 duck' },
+      { char: '🦅', tags: '독수리 eagle' },
+      { char: '🦉', tags: '부엉이 올빼미 owl' },
+      { char: '🦇', tags: '박쥐 bat' },
+      { char: '🐺', tags: '늑대 wolf' },
+      { char: '🐗', tags: '멧돼지 boar' },
+      { char: '🐴', tags: '말 horse' },
+      { char: '🦄', tags: '유니콘 unicorn' },
+      { char: '🐝', tags: '벌 꿀벌 bee' },
+      { char: '🪱', tags: '지렁이 worm' },
+      { char: '🐛', tags: '애벌레 벌레 bug caterpillar' },
+      { char: '🦋', tags: '나비 butterfly' },
+      { char: '🐌', tags: '달팽이 snail' },
+      { char: '🐞', tags: '무당벌레 ladybug' },
+      { char: '🐜', tags: '개미 ant' },
+      { char: '🕷️', tags: '거미 spider' },
+      { char: '🦂', tags: '전갈 scorpion' },
+      { char: '🐢', tags: '거북이 turtle' },
+      { char: '🐍', tags: '뱀 snake' },
+      { char: '🦎', tags: '도마뱀 lizard' },
+      { char: '🐙', tags: '문어 octopus' },
+      { char: '🦑', tags: '오징어 squid' },
+      { char: '🦞', tags: '바닷가재 랍스터 lobster' },
+      { char: '🦀', tags: '게 crab' },
+      { char: '🐠', tags: '물고기 열대어 fish' },
+      { char: '🐟', tags: '물고기 생선 fish' },
+      { char: '🐬', tags: '돌고래 dolphin' },
+      { char: '🐳', tags: '고래 whale' },
+      { char: '🦈', tags: '상어 shark' },
+      { char: '🐊', tags: '악어 crocodile' },
+      { char: '🦖', tags: '티라노 공룡 t-rex' },
+      { char: '🦕', tags: '아파토 공룡 dinosaur' },
+      { char: '🦍', tags: '고릴라 gorilla' },
+      { char: '🦧', tags: '오랑우탄 orangutan' },
+      { char: '🌲', tags: '나무 소나무 pine tree' },
+      { char: '🌳', tags: '나무 낙엽수 tree' },
+      { char: '🌴', tags: '야자수 palm tree' },
+      { char: '🌵', tags: '선인장 cactus' },
+      { char: '🌾', tags: '벼 보리 grain rice' },
+      { char: '🌿', tags: '허브 풀잎 herb leaf' },
+      { char: '🍀', tags: '네잎클로버 행운 clover luck' },
+      { char: '🍁', tags: '단풍잎 가을 maple autumn' },
+      { char: '🍂', tags: '낙엽 가을 leaves fall' },
+      { char: '🍃', tags: '바람에 날리는 잎 leaf wind' },
+      { char: '🌸', tags: '벚꽃 꽃 봄 cherry blossom flower' },
+      { char: '🌹', tags: '장미 꽃 rose flower' },
+      { char: '🌺', tags: '무궁화 꽃 하와이 hibiscus flower' },
+      { char: '🌻', tags: '해바라기 꽃 sunflower' },
+      { char: '🌼', tags: '꽃 daisy flower' },
+      { char: '🌷', tags: '튤립 꽃 tulip flower' },
+      { char: '🍄', tags: '버섯 mushroom' },
+      { char: '🌰', tags: '밤 chestnut' },
+      { char: '🐚', tags: '조개 shell' },
+      { char: '🕸️', tags: '거미줄 web' }
+    ]
+  },
+  {
+    id: 'food',
+    name: '음식',
+    icon: '🍔',
+    emojis: [
+      { char: '🍏', tags: '풋사과 아오리 apple' },
+      { char: '🍎', tags: '사과 apple' },
+      { char: '🍐', tags: '배 pear' },
+      { char: '🍊', tags: '귤 오렌지 orange mandarin' },
+      { char: '🍋', tags: '레몬 lemon' },
+      { char: '🍌', tags: '바나나 banana' },
+      { char: '🍉', tags: '수박 watermelon' },
+      { char: '🍇', tags: '포도 grape' },
+      { char: '🍓', tags: '딸기 strawberry' },
+      { char: '🍒', tags: '체리 앵두 cherry' },
+      { char: '🍑', tags: '복숭아 peach' },
+      { char: '🥭', tags: '망고 mango' },
+      { char: '🍍', tags: '파인애플 pineapple' },
+      { char: '🥥', tags: '코코넛 coconut' },
+      { char: '🥝', tags: '키위 kiwi' },
+      { char: '🍅', tags: '토마토 tomato' },
+      { char: '🍆', tags: '가지 eggplant' },
+      { char: '🥑', tags: '아보카도 avocado' },
+      { char: '🥦', tags: '브로콜리 broccoli' },
+      { char: '🥬', tags: '상추 배추 샐러드 lettuce' },
+      { char: '🥒', tags: '오이 cucumber' },
+      { char: '🌶️', tags: '고추 매운 hot pepper spicy' },
+      { char: '🌽', tags: '옥수수 corn' },
+      { char: '🥕', tags: '당근 carrot' },
+      { char: '🥔', tags: '감자 potato' },
+      { char: '🍠', tags: '고구마 sweet potato' },
+      { char: '🥐', tags: '크로와상 빵 croissant bread' },
+      { char: '🥯', tags: '베이글 빵 bagel' },
+      { char: '🍞', tags: '식빵 빵 bread' },
+      { char: '🥖', tags: '바게트 빵 baguette' },
+      { char: '🧀', tags: '치즈 cheese' },
+      { char: '🥚', tags: '계란 달걀 egg' },
+      { char: '🍳', tags: '계란후라이 요리 egg fry' },
+      { char: '🥞', tags: '팬케이크 pancake' },
+      { char: '🧇', tags: '와플 waffle' },
+      { char: '🥓', tags: '베이컨 삼겹살 bacon' },
+      { char: '🥩', tags: '스테이크 고기 meat steak' },
+      { char: '🍗', tags: '닭다리 치킨 chicken' },
+      { char: '🍖', tags: '갈비 고기 meat' },
+      { char: '🌭', tags: '핫도그 hotdog' },
+      { char: '🍔', tags: '햄버거 버거 burger hamburger' },
+      { char: '🍟', tags: '감자튀김 감튀 french fries' },
+      { char: '🍕', tags: '피자 pizza' },
+      { char: '🥪', tags: '샌드위치 sandwich' },
+      { char: '🌮', tags: '타코 taco' },
+      { char: '🌯', tags: '부리토 burrito' },
+      { char: '🥗', tags: '샐러드 salad' },
+      { char: '🍿', tags: '팝콘 popcorn' },
+      { char: '🍱', tags: '도시락 bento' },
+      { char: '🥟', tags: '만두 dumpling' },
+      { char: '🍣', tags: '초밥 스시 sushi' },
+      { char: '🍜', tags: '라면 우동 국수 ramen noodle' },
+      { char: '🍝', tags: '스파게티 파스타 spaghetti pasta' },
+      { char: '🍦', tags: '아이스크림 소프트콘 icecream' },
+      { char: '🍩', tags: '도넛 donut' },
+      { char: '🍪', tags: '쿠키 과자 cookie' },
+      { char: '🎂', tags: '케이크 생일 cake birthday' },
+      { char: '🍰', tags: '조각케이크 cake' },
+      { char: '🍫', tags: '초콜릿 chocolate' },
+      { char: '🍬', tags: '사탕 캔디 candy' },
+      { char: '🍭', tags: '롤리팝 막대사탕 lollipop' },
+      { char: '🍯', tags: '꿀 허니 honey' },
+      { char: '☕', tags: '커피 차 카페 coffee tea' },
+      { char: '🍵', tags: '녹차 녹찻잔 tea green' },
+      { char: '🍶', tags: '사케 정종 도자기 sake' },
+      { char: '🍾', tags: '샴페인 축하 champagne' },
+      { char: '🍷', tags: '와인 와인잔 wine' },
+      { char: '🍸', tags: '칵테일 cocktail' },
+      { char: '🍹', tags: '열대음식 주스 drink' },
+      { char: '🍺', tags: '맥주 술 beer' },
+      { char: '🍻', tags: '맥주 건배 짠 cheers beer' },
+      { char: '🥤', tags: '탄산음료 빨대소다 soda juice' },
+      { char: '🧃', tags: '팩주스 음료 juice' },
+      { char: '🧉', tags: '마테차 mate' },
+      { char: '🧊', tags: '얼음 ice' }
+    ]
+  },
+  {
+    id: 'travel',
+    name: '여행',
+    icon: '✈️',
+    emojis: [
+      { char: '🚗', tags: '자동차 빨간차 car red' },
+      { char: '🚕', tags: '택시 taxi' },
+      { char: '🚙', tags: '차 파란차 suv blue' },
+      { char: '🚌', tags: '버스 bus' },
+      { char: '🚎', tags: '트롤리 버스 trolley' },
+      { char: '🏎️', tags: '레이싱카 f1 racing' },
+      { char: '🚓', tags: '경찰차 police' },
+      { char: '🚑', tags: '구급차 ambulance' },
+      { char: '🚒', tags: '소방차 fire' },
+      { char: '🚐', tags: '승합차 van' },
+      { char: '🚚', tags: '트럭 truck' },
+      { char: '🚛', tags: '대형트럭 truck large' },
+      { char: '🚜', tags: '트랙터 tractor' },
+      { char: '🛵', tags: '스쿠터 오토바이 scooter motor' },
+      { char: '🚲', tags: '자전거 bicycle bike' },
+      { char: '🛴', tags: '킥보드 scooter kick' },
+      { char: '🚨', tags: '사이렌 경보 비상 siren emergency' },
+      { char: '🚥', tags: '신호등 traffic light' },
+      { char: '⚓', tags: '닻 항구 anchor harbor' },
+      { char: '⛵', tags: '돛단배 요트 sailboat yacht' },
+      { char: '🛶', tags: '카누 보트 canoe' },
+      { char: '🚤', tags: '모터보트 쾌속선 speedboat' },
+      { char: '🛳️', tags: '여객선 크루즈 ship cruise' },
+      { char: '🚢', tags: '배 선박 ship' },
+      { char: '✈️', tags: '비행기 여행 airplane flight' },
+      { char: '🛫', tags: '이륙 비행기 takeoff' },
+      { char: '🛬', tags: '착륙 비행기 landing' },
+      { char: '🪂', tags: '낙하산 패러글라이딩 parachute' },
+      { char: '🚁', tags: '헬리콥터 helicopter' },
+      { char: '🚀', tags: '로켓 우주선 rocket space' },
+      { char: '🛸', tags: 'ufo 외계인 미확인 비행물체 ufo alien' },
+      { char: '🌍', tags: '지구 유럽 아프리카 earth' },
+      { char: '🌎', tags: '지구 아메리카 earth' },
+      { char: '🌏', tags: '지구 아시아 오세아니아 한국 earth asia' },
+      { char: '🌐', tags: '인터넷 웹 네트워크 global network' },
+      { char: '🗺️', tags: '지도 세계지도 map' },
+      { char: '🧭', tags: '나침반 방향 compass' },
+      { char: '🏔️', tags: '만년설 산 눈 덮인 mountain snow' },
+      { char: '⛰️', tags: '산 봉우리 mountain' },
+      { char: '🌋', tags: '화산 분출 volcano' },
+      { char: '🗻', tags: '후지산 산 fuji mountain' },
+      { char: '🏕️', tags: '캠핑 텐트 야영 camping tent' },
+      { char: '🏖️', tags: '해변 파라솔 바다 beach sand' },
+      { char: '🏜️', tags: '사막 모래 desert' },
+      { char: '🏝️', tags: '무인도 섬 island' },
+      { char: '🏞️', tags: '국립공원 계곡 park river' },
+      { char: '🏟️', tags: '경기장 체육관 stadium' },
+      { char: '🏛️', tags: '그리스 신전 법원 미술관 temple museum' },
+      { char: '🏗️', tags: '공사중 크레인 building crane' },
+      { char: '🏠', tags: '집 주택 house' },
+      { char: '🏡', tags: '정원이 있는 집 house garden' },
+      { char: '🏢', tags: '빌딩 사무실 office building' },
+      { char: '🏣', tags: '우체국 post office' },
+      { char: '🏥', tags: '병원 의원 hospital' },
+      { char: '🏦', tags: '은행 bank' },
+      { char: '🏨', tags: '호텔 hotel' },
+      { char: '🏪', tags: '편의점 convenience store' },
+      { char: '🏫', tags: '학교 school' },
+      { char: '🏬', tags: '백화점 쇼핑몰 department store' },
+      { char: '🏭', tags: '공장 팩토리 factory' },
+      { char: '🏯', tags: '일본 성 castle japanese' },
+      { char: '🏰', tags: '성 디즈니 castle' },
+      { char: '🗼', tags: '도쿄타워 에펠탑 tower' },
+      { char: '🗽', tags: '자유의 여신상 statue liberty' },
+      { char: '⛪', tags: '교회 성당 church' },
+      { char: '🕌', tags: '모스크 이슬람 mosque' },
+      { char: '🕍', tags: '시나고그 유대교 synagogue' },
+      { char: '⛩️', tags: '신사 도리이 shrine torii' },
+      { char: '♨️', tags: '온천 목욕탕 hot spring' }
+    ]
+  },
+  {
+    id: 'objects',
+    name: '물건',
+    icon: '💡',
+    emojis: [
+      { char: '💻', tags: '노트북 컴퓨터 맥북 laptop computer macbook' },
+      { char: '🖥️', tags: '모니터 데스크탑 pc screen desktop' },
+      { char: '🖨️', tags: '프린터 인쇄 printer' },
+      { char: '⌨️', tags: '키보드 자판 keyboard' },
+      { char: '🖱️', tags: '마우스 마우스클릭 mouse' },
+      { char: '💽', tags: '미니디스크 md minidisc' },
+      { char: '💾', tags: '플로피 디스크 저장 floppy' },
+      { char: '💿', tags: '시디 cd' },
+      { char: '📀', tags: '디브이디 dvd' },
+      { char: '📼', tags: '비디오 테이프 cassette' },
+      { char: '📷', tags: '카메라 사진 camera' },
+      { char: '📸', tags: '카메라 플래시 camera flash' },
+      { char: '📹', tags: '비디오 카메라 촬영 video' },
+      { char: '🎥', tags: '영화 카메라 캠코더 movie' },
+      { char: 'tv', char: '📺', tags: '텔레비전 티비 tv' },
+      { char: '📻', tags: '라디오 radio' },
+      { char: '🎙️', tags: '마이크 녹음 스튜디오 mic microphone' },
+      { char: '⏱️', tags: '초시계 스톱워치 stopwatch' },
+      { char: '⏰', tags: '알람 시계 자명종 clock alarm' },
+      { char: '⌛', tags: '모래시계 끝 hourglass' },
+      { char: '⏳', tags: '모래시계 진행 hourglass flow' },
+      { char: '📡', tags: '안테나 위성 satellite antenna' },
+      { char: '🔋', tags: '배터리 건전지 battery' },
+      { char: '🔌', tags: '콘센트 플러그 plug' },
+      { char: '💡', tags: '전구 아이디어 생각 lightbulb idea' },
+      { char: '🔦', tags: '손전등 플래시 flashlight' },
+      { char: '🕯️', tags: '양초 촛불 candle' },
+      { char: '💸', tags: '돈 날아가는돈 money fly' },
+      { char: '💵', tags: '달러 지폐 돈 dollar bill money' },
+      { char: '💴', tags: '엔화 지폐 돈 yen bill' },
+      { char: '💶', tags: '유로 지폐 돈 euro bill' },
+      { char: '💷', tags: '파운드 지폐 돈 pound bill' },
+      { char: '🪙', tags: '동전 코인 coin' },
+      { char: '💎', tags: '보석 다이아몬드 diamond jewel' },
+      { char: '🔧', tags: '렌치 스패너 공구 wrench tool' },
+      { char: '🔨', tags: '망치 공구 망치질 hammer tool' },
+      { char: '🛠️', tags: '망치 스패너 공구 도구 hammer wrench tools' },
+      { char: '⚙️', tags: '톱니바퀴 설정 기어 gear setting' },
+      { char: '🧱', tags: '벽돌 brick' },
+      { char: '⛓️', tags: '쇠사슬 체인 chain' },
+      { char: '🔫', tags: '물총 권총 총 gun pistol water' },
+      { char: '💣', tags: '폭탄 터짐 bomb' },
+      { char: '🧨', tags: '폭죽 폭탄 firecracker' },
+      { char: '🛡️', tags: '방패 보호 보안 shield guard' },
+      { char: '🔑', tags: '열쇠 키 key' },
+      { char: '🗝️', tags: '오래된 열쇠 key old' },
+      { char: '📦', tags: '상자 박스 택배 package box' },
+      { char: '🏷️', tags: '태그 라벨 가격표 tag label' },
+      { char: '✉️', tags: '편지 봉투 메일 email envelope' },
+      { char: '📨', tags: '수신 메일 수신함 inbox' },
+      { char: '📊', tags: '차트 통계 그래프 chart bar' },
+      { char: '📈', tags: '우상향 그래프 차트 chart up trend' },
+      { char: '📉', tags: '우하향 그래프 차트 chart down trend' },
+      { char: '📅', tags: '달력 일정 캘린더 calendar date' },
+      { char: '📆', tags: '낱장 달력 일정 calendar' },
+      { char: '📋', tags: '클립보드 문서 결재 clipboard' },
+      { char: '📌', tags: '핀 압정 고정 pin pushpin' },
+      { char: '📍', tags: '지도 핀 위치 pin location' },
+      { char: '📎', tags: '클립 종이클립 clip' },
+      { char: '📝', tags: '노트 메모 필기 연필 memo write pencil' },
+      { char: '🔒', tags: '잠금 자물쇠 보안 lock' },
+      { char: '🔓', tags: '잠금 해제 자물쇠 unlock' },
+      { char: '🔏', tags: '펜 자물쇠 서명 sign lock' },
+      { char: '🔐', tags: '열쇠 자물쇠 보안 lock key' },
+      { char: '❤️', tags: '하트 빨간하트 사랑 heart love red' },
+      { char: '🧡', tags: '주황하트 heart orange' },
+      { char: '💛', tags: '노란하트 heart yellow' },
+      { char: '💚', tags: '초록하트 heart green' },
+      { char: '💙', tags: '파란하트 heart blue' },
+      { char: '💜', tags: '보라하트 heart purple' },
+      { char: '🖤', tags: '검은하트 heart black' },
+      { char: '🤍', tags: '하얀하트 heart white' },
+      { char: '🤎', tags: '갈색하트 heart brown' },
+      { char: '💯', tags: '백점 만점 최고 100 score' },
+      { char: '💥', tags: '폭발 쾅 충격 collision burst' },
+      { char: '✨', tags: '반짝반짝 별 반짝 sparkles' },
+      { char: '🔥', tags: '불 화재 인기 뜨거움 fire hot' },
+      { char: '⚠️', tags: '주의 경고 위험 warning' },
+      { char: '⛔', tags: '진입금지 금지 no entry' },
+      { char: '🚫', tags: '금지 제한 forbidden' },
+      { char: '❌', tags: '엑스 틀림 오답 cross x' },
+      { char: '⭕', tags: '동그라미 정답 맞춤 circle o' }
+    ]
+  }
+];
+
+let activeEmojiCategoryId = 'smileys';
+const emojiTabsContainer = document.getElementById('emoji-tabs');
+const emojiGridContainer = document.getElementById('emoji-grid');
+const emojiSearchInput = document.getElementById('emoji-search');
+
+// Render emoji picker: tabs and emojis matching state
+function renderEmojiPicker() {
+  if (!emojiTabsContainer || !emojiGridContainer) return;
+
+  // Render Category Tabs
+  emojiTabsContainer.innerHTML = emojiCategories.map(cat => {
+    const isActive = cat.id === activeEmojiCategoryId;
+    const activeClass = 'bg-primary text-white dark:bg-primary-container dark:text-on-primary-container';
+    const inactiveClass = 'bg-surface-container hover:bg-surface-container-high dark:bg-slate-700 dark:hover:bg-slate-600 text-on-surface-variant dark:text-slate-300';
+    return `
+      <button type="button" class="emoji-tab-btn shrink-0 flex items-center gap-1 text-[11px] font-semibold px-2.5 py-1.5 rounded-lg transition-colors ${isActive ? activeClass : inactiveClass}" data-category-id="${cat.id}">
+        <span>${cat.icon}</span>
+        <span>${cat.name}</span>
+      </button>
+    `;
+  }).join('');
+
+  // Collect matching emojis
+  const query = (emojiSearchInput ? emojiSearchInput.value : '').trim().toLowerCase();
+  let emojiList = [];
+
+  if (query) {
+    emojiCategories.forEach(cat => {
+      cat.emojis.forEach(emoji => {
+        if (emoji.tags.toLowerCase().includes(query) || emoji.char.includes(query)) {
+          if (!emojiList.some(e => e.char === emoji.char)) {
+            emojiList.push(emoji);
+          }
+        }
+      });
+    });
+  } else {
+    const activeCat = emojiCategories.find(cat => cat.id === activeEmojiCategoryId);
+    if (activeCat) {
+      emojiList = activeCat.emojis;
+    }
+  }
+
+  // Render Grid Content
+  if (emojiList.length === 0) {
+    emojiGridContainer.innerHTML = `
+      <div class="col-span-8 text-[11px] text-center text-outline dark:text-slate-500 py-6 font-semibold">
+        검색 결과가 없습니다
+      </div>
+    `;
+  } else {
+    emojiGridContainer.innerHTML = emojiList.map(emoji => `
+      <button type="button" class="emoji-option text-xl p-1 hover:bg-surface-container-low dark:hover:bg-slate-700 rounded transition-colors flex items-center justify-center" data-emoji="${emoji.char}" title="${emoji.tags.split(' ')[0]}">
+        ${emoji.char}
+      </button>
+    `).join('');
+  }
+}
+
+// Attach event listeners for emoji selection
+if (btnEmoji && emojiDropdown) {
+  btnEmoji.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isHidden = emojiDropdown.classList.contains('hidden');
+    
+    if (headerDropdown) headerDropdown.classList.add('hidden');
+    
+    if (isHidden) {
+      // Calculate layout coordinates dynamically to avoid screen limits
+      const rect = btnEmoji.getBoundingClientRect();
+      let left = rect.left;
+      let top = rect.bottom + window.scrollY;
+      
+      if (left + 288 > window.innerWidth) {
+        left = window.innerWidth - 288 - 16;
+      }
+      if (left < 16) {
+        left = 16;
+      }
+      
+      emojiDropdown.style.top = `${top}px`;
+      emojiDropdown.style.left = `${left}px`;
+      emojiDropdown.classList.remove('hidden');
+      
+      // Focus Search and Reset values
+      if (emojiSearchInput) {
+        emojiSearchInput.value = '';
+        setTimeout(() => emojiSearchInput.focus(), 50);
+      }
+      activeEmojiCategoryId = 'smileys';
+      renderEmojiPicker();
+    } else {
+      emojiDropdown.classList.add('hidden');
+    }
+  });
+
+  // Tab switching click handling
+  if (emojiTabsContainer) {
+    emojiTabsContainer.addEventListener('click', (e) => {
+      const btn = e.target.closest('.emoji-tab-btn');
+      if (!btn) return;
+      
+      activeEmojiCategoryId = btn.getAttribute('data-category-id');
+      if (emojiSearchInput) emojiSearchInput.value = ''; // Reset query on tab change
+      renderEmojiPicker();
+    });
+  }
+
+  // Live input filtering event
+  if (emojiSearchInput) {
+    emojiSearchInput.addEventListener('input', () => {
+      if (emojiSearchInput.value.trim()) {
+        // Remove selection color from tabs when searching globally
+        const tabs = emojiTabsContainer.querySelectorAll('.emoji-tab-btn');
+        tabs.forEach(tab => {
+          tab.className = 'emoji-tab-btn shrink-0 flex items-center gap-1 text-[11px] font-semibold px-2.5 py-1.5 rounded-lg transition-colors bg-surface-container hover:bg-surface-container-high dark:bg-slate-700 dark:hover:bg-slate-600 text-on-surface-variant dark:text-slate-300';
+        });
+      } else {
+        // Restore tab active colors
+        renderEmojiPicker();
+        return;
+      }
+      renderEmojiPicker();
+    });
+    
+    emojiSearchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        emojiDropdown.classList.add('hidden');
+        editor.focus({ preventScroll: true });
+      }
+    });
+  }
+
+  // Emoji selection (Event delegation)
+  if (emojiGridContainer) {
+    emojiGridContainer.addEventListener('click', (e) => {
+      const opt = e.target.closest('.emoji-option');
+      if (!opt) return;
+      
+      e.stopPropagation();
+      const emoji = opt.getAttribute('data-emoji');
+      
+      editor.setRangeText(emoji, editor.selectionStart, editor.selectionEnd, 'end');
+      editor.focus({ preventScroll: true });
+      updatePreview();
+      if (historyManager) historyManager.push();
+      emojiDropdown.classList.add('hidden');
+    });
+  }
+
+  document.addEventListener('click', (e) => {
+    if (!emojiDropdown.classList.contains('hidden') && !btnEmoji.contains(e.target) && !emojiDropdown.contains(e.target)) {
+      emojiDropdown.classList.add('hidden');
     }
   });
 }
@@ -832,10 +1445,29 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js')
       .then((reg) => {
         console.log('ServiceWorker registration successful with scope: ', reg.scope);
+        
+        // Active checker for updates
+        reg.addEventListener('updatefound', () => {
+          const newWorker = reg.installing;
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              console.log('New content is available, service worker will update.');
+            }
+          });
+        });
       })
       .catch((err) => {
         console.error('ServiceWorker registration failed: ', err);
       });
+  });
+
+  // Reload the page once the new service worker takes over (forces cache refresh)
+  let refreshing = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!refreshing) {
+      window.location.reload();
+      refreshing = true;
+    }
   });
 }
 
