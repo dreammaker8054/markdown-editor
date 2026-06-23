@@ -465,7 +465,11 @@ document.querySelectorAll('.group').forEach(btn => {
       case 'format_list_bulleted': insert = '\n* 항목'; break;
       case 'format_list_numbered': insert = '\n1. 항목'; break;
       case 'format_quote': insert = '\n> 인용구'; break;
-      case 'table_chart': insert = '\n\n| 제목 | 제목 |\n| --- | --- |\n| 내용 | 내용 |\n'; break;
+      case 'table_chart':
+        if (typeof openTableDropdown === 'function') {
+          openTableDropdown(btn);
+        }
+        return;
       case 'title': insert = '\n## 제목'; break;
       case 'checklist': insert = '\n- [ ] 할일'; break;
       case 'horizontal_rule': insert = '\n\n---\n\n'; break;
@@ -578,14 +582,52 @@ function closeSlashMenu() {
 
 function insertSlashItem(item) {
   if (slashStartIndex === -1) return;
-  const insertText = item.getAttribute('data-insert');
+  const command = item.getAttribute('data-command');
   
-  editor.setRangeText(insertText, slashStartIndex, editor.selectionEnd, 'end');
-  editor.focus({ preventScroll: true });
-  updatePreview();
-  if (historyManager) historyManager.push();
+  if (command === 'table_chart') {
+    editor.setRangeText('', slashStartIndex, editor.selectionEnd, 'end');
+    editor.selectionStart = slashStartIndex;
+    editor.selectionEnd = slashStartIndex;
+    if (typeof openTableDropdown === 'function') {
+      openTableDropdown(item);
+    }
+    closeSlashMenu();
+    return;
+  }
+
+  const insertText = item.getAttribute('data-insert');
+  if (insertText) {
+    editor.setRangeText(insertText, slashStartIndex, editor.selectionEnd, 'end');
+    editor.focus({ preventScroll: true });
+    updatePreview();
+    if (historyManager) historyManager.push();
+  }
   
   closeSlashMenu();
+}
+
+function openTableDropdown(anchorElement) {
+  if (typeof emojiDropdown !== 'undefined' && emojiDropdown) emojiDropdown.classList.add('hidden');
+  if (typeof headerDropdown !== 'undefined' && headerDropdown) headerDropdown.classList.add('hidden');
+  
+  if (typeof tableDropdown !== 'undefined' && tableDropdown) {
+    const rect = anchorElement.getBoundingClientRect();
+    let left = rect.left;
+    let top = rect.bottom + window.scrollY;
+    
+    if (left + 208 > window.innerWidth) {
+      left = window.innerWidth - 208 - 16;
+    }
+    if (left < 16) left = 16;
+    
+    tableDropdown.style.top = `${top}px`;
+    tableDropdown.style.left = `${left}px`;
+    tableDropdown.classList.remove('hidden');
+    
+    colInput.value = 2;
+    rowInput.value = 2;
+    setTimeout(() => colInput.focus(), 50);
+  }
 }
 
 editor.addEventListener('input', (e) => {
@@ -732,6 +774,52 @@ const btnHeaderMenu = document.getElementById('btn-header-menu');
 const headerDropdown = document.getElementById('header-dropdown');
 const btnEmoji = document.getElementById('btn-emoji');
 const emojiDropdown = document.getElementById('emoji-dropdown');
+
+// --- Table Dropdown ---
+const tableDropdown = document.getElementById('table-dropdown');
+const colInput = document.getElementById('table-cols');
+const rowInput = document.getElementById('table-rows');
+const btnApplyTable = document.getElementById('btn-apply-table');
+
+if (btnApplyTable) {
+  btnApplyTable.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const cols = parseInt(colInput.value) || 2;
+    const rows = parseInt(rowInput.value) || 2;
+    
+    let tableMarkdown = '\n\n';
+    
+    for (let i = 0; i < cols; i++) tableMarkdown += `| 제목 ${i + 1} `;
+    tableMarkdown += '|\n';
+    
+    for (let i = 0; i < cols; i++) tableMarkdown += '| --- ';
+    tableMarkdown += '|\n';
+    
+    const contentRows = rows <= 1 ? 1 : rows - 1;
+    for (let r = 0; r < contentRows; r++) {
+      for (let c = 0; c < cols; c++) tableMarkdown += '| 내용 ';
+      tableMarkdown += '|\n';
+    }
+    tableMarkdown += '\n';
+    
+    editor.setRangeText(tableMarkdown, editor.selectionStart, editor.selectionEnd, 'end');
+    editor.focus({ preventScroll: true });
+    updatePreview();
+    if (historyManager) historyManager.push();
+    
+    tableDropdown.classList.add('hidden');
+  });
+
+  document.addEventListener('click', (e) => {
+    const path = e.composedPath();
+    if (tableDropdown && !tableDropdown.classList.contains('hidden')) {
+      const isBtn = e.target.closest('.group') || e.target.closest('.slash-item');
+      if (!path.includes(tableDropdown) && !isBtn) {
+        tableDropdown.classList.add('hidden');
+      }
+    }
+  });
+}
 
 if (btnHeaderMenu && headerDropdown) {
   btnHeaderMenu.addEventListener('click', (e) => {
