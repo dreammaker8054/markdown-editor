@@ -1595,6 +1595,7 @@ if (btnEmoji && emojiDropdown) {
       const btn = e.target.closest('.emoji-tab-btn');
       if (!btn) return;
       
+      e.stopPropagation(); // 브라우저 호환성을 위해 이벤트 버블링 강제 차단
       activeEmojiCategoryId = btn.getAttribute('data-category-id');
       if (emojiSearchInput) emojiSearchInput.value = ''; // Reset query on tab change
       renderEmojiPicker();
