@@ -164,7 +164,7 @@
 </div>
 <button id="btn-changelog" class="text-on-surface-variant dark:text-slate-300 hover:bg-surface-container-low dark:hover:bg-slate-800 px-3 py-1.5 rounded-full text-body-ui font-bold transition-colors flex items-center gap-1 shrink-0" title="업데이트 일지">
 <span class="material-symbols-outlined text-lg">history</span>
-<span class="hidden sm:inline">v1.7.0</span>
+<span class="hidden sm:inline">v1.8.0</span>
 </button>
 <button id="btn-guide" class="text-primary hover:bg-primary-fixed-dim dark:hover:bg-slate-800 px-3 py-1.5 rounded-full text-body-ui font-bold transition-colors flex items-center gap-1 shrink-0" title="마크다운 가이드">
 <span class="material-symbols-outlined text-lg">help</span>
@@ -481,16 +481,30 @@
 
         <!-- v1.7.0 -->
         <div class="relative">
-          <div class="absolute -left-[31px] top-1.5 bg-primary dark:bg-primary w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
+          <div class="absolute -left-[31px] top-1.5 bg-slate-400 w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
           <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
             <span>v1.7.0</span>
             <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-18</span>
           </div>
-          <p class="mt-2 leading-relaxed font-semibold text-primary dark:text-primary-container">실행 취소(Undo) 및 실행 복귀(Redo) 기능 구현</p>
-          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs">
+          <p class="mt-2 leading-relaxed">실행 취소(Undo) 및 실행 복귀(Redo) 기능 구현</p>
+          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
             <li>에디터 내 텍스트 편집 및 마우스 동작 상태 스택 관리</li>
             <li>단축키 연동 (Ctrl+Z / Ctrl+Y / Cmd+Shift+Z 등)</li>
             <li>도구 모음 우측 끝에 전용 실행 취소/복귀 버튼 배치</li>
+          </ul>
+        </div>
+
+        <!-- v1.8.0 -->
+        <div class="relative">
+          <div class="absolute -left-[31px] top-1.5 bg-primary dark:bg-primary w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
+          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
+            <span>v1.8.0</span>
+            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-23</span>
+          </div>
+          <p class="mt-2 leading-relaxed font-semibold text-primary dark:text-primary-container">에디터 기본값 복원(초기화) 및 안전장치 강화</p>
+          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs">
+            <li>에디터 상단에 디폴트 템플릿 복원을 위한 '초기화' 버튼 신설</li>
+            <li>새 문서 시작, 파일 로드, 초기화 시 실수 방지를 위한 Undo(실행 취소) 연동</li>
           </ul>
         </div>
 
