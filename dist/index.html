@@ -135,7 +135,7 @@
     <meta name="theme-color" content="#003ec7">
     <link rel="apple-touch-icon" href="./icon-192.png">
     <link rel="icon" type="image/png" href="./icon-192.png">
-  <script type="module" crossorigin src="/markdown-editor/assets/main-B-U1o47V.js"></script>
+  <script type="module" crossorigin src="/markdown-editor/assets/main-BUatdET8.js"></script>
   <link rel="stylesheet" crossorigin href="/markdown-editor/assets/main-DDVD8Go0.css">
 </head>
 <body class="bg-background text-on-background dark:bg-slate-950 dark:text-slate-50 font-body-ui h-screen overflow-hidden flex flex-row">
@@ -165,7 +165,7 @@
 </div>
 <button id="btn-changelog" class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold bg-primary/10 text-primary hover:bg-primary hover:text-white rounded-full transition-colors group">
 <span class="material-symbols-outlined text-[16px]">history</span>
-<span class="hidden sm:inline">v2.2.1</span>
+<span class="hidden sm:inline">v2.2.2</span>
 </button>
 <button id="btn-guide" class="text-primary hover:bg-primary-fixed-dim dark:hover:bg-slate-800 px-3 py-1.5 rounded-full text-body-ui font-bold transition-colors flex items-center gap-1 shrink-0" title="마크다운 가이드">
 <span class="material-symbols-outlined text-lg">help</span>
@@ -370,7 +370,7 @@
 <div id="emoji-dropdown" class="hidden fixed w-72 bg-white dark:bg-slate-800 border border-outline-variant dark:border-slate-700 shadow-2xl rounded-2xl p-3 z-50 flex flex-col gap-2 font-body-ui">
   <div class="flex items-center justify-between px-1 border-b border-outline-variant dark:border-slate-700 pb-2">
     <span class="text-xs font-bold text-on-surface dark:text-slate-200">이모지 픽커</span>
-    <span class="text-[10px] text-outline dark:text-slate-400 font-semibold" id="emoji-picker-status">v2.2.1</span>
+    <span class="text-[10px] text-outline dark:text-slate-400 font-semibold" id="emoji-picker-status">v2.2.2</span>
   </div>
   <!-- Search Input -->
   <div class="relative flex items-center">
@@ -449,141 +449,74 @@
     <div class="p-6 overflow-y-auto custom-scrollbar flex-1 space-y-6">
       <div class="relative border-l-2 border-primary-container dark:border-slate-700 pl-6 ml-2 space-y-6 text-sm text-on-surface dark:text-slate-300">
         
-        <!-- v1.0.0 -->
+        <!-- v2.2.2 -->
         <div class="relative">
-          <div class="absolute -left-[31px] top-1.5 bg-slate-400 w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
+          <div class="absolute -left-[31px] top-1.5 bg-primary dark:bg-primary w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
           <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
-            <span>v1.0.0</span>
-            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-16</span>
-          </div>
-          <p class="mt-2 leading-relaxed">초기 버전 릴리즈</p>
-          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
-            <li>마크다운 실시간 렌더링 에디터 기본 기능 탑재</li>
-          </ul>
-        </div>
-
-        <!-- v1.1.0 -->
-        <div class="relative">
-          <div class="absolute -left-[31px] top-1.5 bg-slate-400 w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
-          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
-            <span>v1.1.0</span>
-            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-17</span>
-          </div>
-          <p class="mt-2 leading-relaxed">다크 모드(Dark Mode) 지원</p>
-          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
-            <li>테마 전환 시스템 구축 및 실시간 미리보기 호환</li>
-          </ul>
-        </div>
-
-        <!-- v1.2.0 -->
-        <div class="relative">
-          <div class="absolute -left-[31px] top-1.5 bg-slate-400 w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
-          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
-            <span>v1.2.0</span>
-            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-18</span>
-          </div>
-          <p class="mt-2 leading-relaxed">GFM 콜아웃(Alert Box) 가시성 보완</p>
-          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
-            <li>경고, 중요, 정보 등 테마 스타일 및 맞춤 아이콘 지원</li>
-          </ul>
-        </div>
-
-        <!-- v1.3.0 -->
-        <div class="relative">
-          <div class="absolute -left-[31px] top-1.5 bg-slate-400 w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
-          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
-            <span>v1.3.0</span>
-            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-18</span>
-          </div>
-          <p class="mt-2 leading-relaxed">다단계 제목 및 목록 구성 기능 추가</p>
-          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
-            <li>들여쓰기/내어쓰기 버튼 및 Tab 단축키 지원</li>
-            <li>설명 및 마크다운 가이드 문서 업데이트</li>
-          </ul>
-        </div>
-
-        <!-- v1.4.0 -->
-        <div class="relative">
-          <div class="absolute -left-[31px] top-1.5 bg-slate-400 w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
-          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
-            <span>v1.4.0</span>
-            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-18</span>
-          </div>
-          <p class="mt-2 leading-relaxed">사용자 지정 마크다운 PWA 앱 아이콘 탑재</p>
-          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
-            <li>정식 말풍선 디자인 에셋으로 PWA 아이콘 교체</li>
-          </ul>
-        </div>
-
-        <!-- v1.5.0 -->
-        <div class="relative">
-          <div class="absolute -left-[31px] top-1.5 bg-slate-400 w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
-          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
-            <span>v1.5.0</span>
-            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-18</span>
-          </div>
-          <p class="mt-2 leading-relaxed">반응형 전체 너비(Wide View) 레이아웃 적용</p>
-          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
-            <li>스플릿 모드 좌우 가로폭 제약(max-width) 해제</li>
-            <li>에디터 단독 보기 가로폭 대폭 확장</li>
-          </ul>
-        </div>
-
-        <!-- v1.6.0 -->
-        <div class="relative">
-          <div class="absolute -left-[31px] top-1.5 bg-slate-400 w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
-          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
-            <span>v1.6.0</span>
-            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-18</span>
-          </div>
-          <p class="mt-2 leading-relaxed">제목 스타일 선택 메뉴 잘림(Clipping) 버그 수정</p>
-          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
-            <li>드롭다운 메뉴를 body 하위 최상위 레이어로 구조 분리</li>
-            <li>fixed 절대 좌표 매핑으로 스크롤 잘림 문제 해결</li>
-          </ul>
-        </div>
-
-        <!-- v1.7.0 -->
-        <div class="relative">
-          <div class="absolute -left-[31px] top-1.5 bg-slate-400 w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
-          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
-            <span>v1.7.0</span>
-            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-18</span>
-          </div>
-          <p class="mt-2 leading-relaxed">실행 취소(Undo) 및 실행 복귀(Redo) 기능 구현</p>
-          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
-            <li>에디터 내 텍스트 편집 및 마우스 동작 상태 스택 관리</li>
-            <li>단축키 연동 (Ctrl+Z / Ctrl+Y / Cmd+Shift+Z 등)</li>
-            <li>도구 모음 우측 끝에 전용 실행 취소/복귀 버튼 배치</li>
-          </ul>
-        </div>
-
-        <!-- v1.8.0 -->
-        <div class="relative">
-          <div class="absolute -left-[31px] top-1.5 bg-slate-400 w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
-          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
-            <span>v1.8.0</span>
+            <span>v2.2.2</span>
             <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-23</span>
           </div>
-          <p class="mt-2 leading-relaxed">에디터 기본값 복원(초기화) 및 안전장치 강화</p>
+          <p class="mt-2 leading-relaxed font-semibold text-primary dark:text-primary-container">이모지 픽커 확장</p>
           <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
-            <li>에디터 상단에 디폴트 템플릿 복원을 위한 '초기화' 버튼 신설</li>
-            <li>새 문서 시작, 파일 로드, 초기화 시 실수 방지를 위한 Undo(실행 취소) 연동</li>
+            <li>'문자(숫자/알파벳 등)' 및 '국기' 이모지 카테고리 2종 신규 추가</li>
+            <li>더욱 다양한 이모지 제공으로 표현력 강화</li>
           </ul>
         </div>
 
-        <!-- v1.9.0 -->
+        <!-- v2.2.1 -->
+        <div class="relative">
+          <div class="absolute -left-[31px] top-1.5 bg-primary dark:bg-primary w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
+          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
+            <span>v2.2.1</span>
+            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-23</span>
+          </div>
+          <p class="mt-2 leading-relaxed font-semibold text-primary dark:text-primary-container">다중 포맷 저장(Export) 지원</p>
+          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
+            <li>마크다운(.md) 외에 텍스트(.txt), Word(.docx), PDF(.pdf) 확장자 저장 기능 추가</li>
+            <li>직관적인 저장 옵션 선택 드롭다운 UI 적용</li>
+            <li>Word/PDF 저장 시 우측 미리보기 레이아웃(문법이 적용된 결과물) 유지 기능 탑재</li>
+          </ul>
+        </div>
+
+        <!-- v2.2.0 -->
+        <div class="relative">
+          <div class="absolute -left-[31px] top-1.5 bg-primary dark:bg-primary w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
+          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
+            <span>v2.2.0</span>
+            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-23</span>
+          </div>
+          <p class="mt-2 leading-relaxed font-semibold text-primary dark:text-primary-container">동적 표 생성기 추가</p>
+          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs">
+            <li>표 아이콘 및 슬래시 메뉴(/표) 사용 시 가로/세로 지정 가능한 팝업창 추가</li>
+            <li>입력한 크기 및 조건에 맞춰 마크다운 테이블 자동 삽입되도록 기능 개선</li>
+          </ul>
+        </div>
+
+        <!-- v2.1.1 -->
+        <div class="relative">
+          <div class="absolute -left-[31px] top-1.5 bg-primary dark:bg-primary w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
+          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
+            <span>v2.1.1</span>
+            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-23</span>
+          </div>
+          <p class="mt-2 leading-relaxed font-semibold text-primary dark:text-primary-container">이모지 픽커 탭 전환 버그 수정</p>
+          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs">
+            <li>다른 이모지 탭으로 이동 시 메뉴가 의도치 않게 닫히는 현상(Detached Node 오류) 해결</li>
+            <li>팝업 및 드롭다운의 외부 클릭(Click Outside) 이벤트 안전성 강화</li>
+          </ul>
+        </div>
+
+        <!-- v2.1.0 -->
         <div class="relative">
           <div class="absolute -left-[31px] top-1.5 bg-slate-400 w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
           <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
-            <span>v1.9.0</span>
+            <span>v2.1.0</span>
             <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-23</span>
           </div>
-          <p class="mt-2 leading-relaxed">이모지(Emoji) 리스트 삽입 기능 추가</p>
+          <p class="mt-2 leading-relaxed">표현 가능한 대규모 이모지 세트 탑재</p>
           <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
-            <li>툴바에 특수 장식 블록으로 '이모지' 버튼 추가</li>
-            <li>그리드 형태의 fixed 팝오버를 띄워 30여종의 핵심 이모지 즉시 선택 및 삽입</li>
-            <li>이모지 선택 입력 시 히스토리 스택 연동으로 즉각 실행 취소(Undo) 가능</li>
+            <li>약 600여 종에 달하는 풍부한 표준 상용 이모지 목록 추가</li>
+            <li>카테고리 탭 구성을 최적화하여 방대한 데이터의 스크롤 탐색 성능 개선</li>
           </ul>
         </div>
 
@@ -602,61 +535,141 @@
           </ul>
         </div>
 
-
-        <!-- v2.1.0 -->
+        <!-- v1.9.0 -->
         <div class="relative">
           <div class="absolute -left-[31px] top-1.5 bg-slate-400 w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
           <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
-            <span>v2.1.0</span>
+            <span>v1.9.0</span>
             <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-23</span>
           </div>
-          <p class="mt-2 leading-relaxed">표현 가능한 대규모 이모지 세트 탑재</p>
+          <p class="mt-2 leading-relaxed">이모지(Emoji) 리스트 삽입 기능 추가</p>
           <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
-            <li>약 600여 종에 달하는 풍부한 표준 상용 이모지 목록 추가</li>
-            <li>카테고리 탭 구성을 최적화하여 방대한 데이터의 스크롤 탐색 성능 개선</li>
+            <li>툴바에 특수 장식 블록으로 '이모지' 버튼 추가</li>
+            <li>그리드 형태의 fixed 팝오버를 띄워 30여종의 핵심 이모지 즉시 선택 및 삽입</li>
+            <li>이모지 선택 입력 시 히스토리 스택 연동으로 즉각 실행 취소(Undo) 가능</li>
           </ul>
         </div>
 
-        <!-- v2.1.1 -->
+        <!-- v1.8.0 -->
         <div class="relative">
-          <div class="absolute -left-[31px] top-1.5 bg-primary dark:bg-primary w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
+          <div class="absolute -left-[31px] top-1.5 bg-slate-400 w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
           <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
-            <span>v2.1.1</span>
+            <span>v1.8.0</span>
             <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-23</span>
           </div>
-          <p class="mt-2 leading-relaxed font-semibold text-primary dark:text-primary-container">이모지 픽커 탭 전환 버그 수정</p>
-          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs">
-            <li>다른 이모지 탭으로 이동 시 메뉴가 의도치 않게 닫히는 현상(Detached Node 오류) 해결</li>
-            <li>팝업 및 드롭다운의 외부 클릭(Click Outside) 이벤트 안전성 강화</li>
-          </ul>
-        </div>
-
-        <!-- v2.2.0 -->
-        <div class="relative">
-          <div class="absolute -left-[31px] top-1.5 bg-primary dark:bg-primary w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
-          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
-            <span>v2.2.0</span>
-            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-23</span>
-          </div>
-          <p class="mt-2 leading-relaxed font-semibold text-primary dark:text-primary-container">동적 표 생성기 추가</p>
-          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs">
-            <li>표 아이콘 및 슬래시 메뉴(/표) 사용 시 가로/세로 지정 가능한 팝업창 추가</li>
-            <li>입력한 크기 및 조건에 맞춰 마크다운 테이블 자동 삽입되도록 기능 개선</li>
-          </ul>
-        </div>
-
-        <!-- v2.2.1 -->
-        <div class="relative">
-          <div class="absolute -left-[31px] top-1.5 bg-primary dark:bg-primary w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
-          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
-            <span>v2.2.1</span>
-            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-23</span>
-          </div>
-          <p class="mt-2 leading-relaxed font-semibold text-primary dark:text-primary-container">다중 포맷 저장(Export) 지원</p>
+          <p class="mt-2 leading-relaxed">에디터 기본값 복원(초기화) 및 안전장치 강화</p>
           <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
-            <li>마크다운(.md) 외에 텍스트(.txt), Word(.docx), PDF(.pdf) 확장자 저장 기능 추가</li>
-            <li>직관적인 저장 옵션 선택 드롭다운 UI 적용</li>
-            <li>Word/PDF 저장 시 우측 미리보기 레이아웃(문법이 적용된 결과물) 유지 기능 탑재</li>
+            <li>에디터 상단에 디폴트 템플릿 복원을 위한 '초기화' 버튼 신설</li>
+            <li>새 문서 시작, 파일 로드, 초기화 시 실수 방지를 위한 Undo(실행 취소) 연동</li>
+          </ul>
+        </div>
+
+        <!-- v1.7.0 -->
+        <div class="relative">
+          <div class="absolute -left-[31px] top-1.5 bg-slate-400 w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
+          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
+            <span>v1.7.0</span>
+            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-18</span>
+          </div>
+          <p class="mt-2 leading-relaxed">실행 취소(Undo) 및 실행 복귀(Redo) 기능 구현</p>
+          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
+            <li>에디터 내 텍스트 편집 및 마우스 동작 상태 스택 관리</li>
+            <li>단축키 연동 (Ctrl+Z / Ctrl+Y / Cmd+Shift+Z 등)</li>
+            <li>도구 모음 우측 끝에 전용 실행 취소/복귀 버튼 배치</li>
+          </ul>
+        </div>
+
+        <!-- v1.6.0 -->
+        <div class="relative">
+          <div class="absolute -left-[31px] top-1.5 bg-slate-400 w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
+          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
+            <span>v1.6.0</span>
+            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-18</span>
+          </div>
+          <p class="mt-2 leading-relaxed">제목 스타일 선택 메뉴 잘림(Clipping) 버그 수정</p>
+          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
+            <li>드롭다운 메뉴를 body 하위 최상위 레이어로 구조 분리</li>
+            <li>fixed 절대 좌표 매핑으로 스크롤 잘림 문제 해결</li>
+          </ul>
+        </div>
+
+        <!-- v1.5.0 -->
+        <div class="relative">
+          <div class="absolute -left-[31px] top-1.5 bg-slate-400 w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
+          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
+            <span>v1.5.0</span>
+            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-18</span>
+          </div>
+          <p class="mt-2 leading-relaxed">반응형 전체 너비(Wide View) 레이아웃 적용</p>
+          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
+            <li>스플릿 모드 좌우 가로폭 제약(max-width) 해제</li>
+            <li>에디터 단독 보기 가로폭 대폭 확장</li>
+          </ul>
+        </div>
+
+        <!-- v1.4.0 -->
+        <div class="relative">
+          <div class="absolute -left-[31px] top-1.5 bg-slate-400 w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
+          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
+            <span>v1.4.0</span>
+            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-18</span>
+          </div>
+          <p class="mt-2 leading-relaxed">사용자 지정 마크다운 PWA 앱 아이콘 탑재</p>
+          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
+            <li>정식 말풍선 디자인 에셋으로 PWA 아이콘 교체</li>
+          </ul>
+        </div>
+
+        <!-- v1.3.0 -->
+        <div class="relative">
+          <div class="absolute -left-[31px] top-1.5 bg-slate-400 w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
+          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
+            <span>v1.3.0</span>
+            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-18</span>
+          </div>
+          <p class="mt-2 leading-relaxed">다단계 제목 및 목록 구성 기능 추가</p>
+          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
+            <li>들여쓰기/내어쓰기 버튼 및 Tab 단축키 지원</li>
+            <li>설명 및 마크다운 가이드 문서 업데이트</li>
+          </ul>
+        </div>
+
+        <!-- v1.2.0 -->
+        <div class="relative">
+          <div class="absolute -left-[31px] top-1.5 bg-slate-400 w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
+          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
+            <span>v1.2.0</span>
+            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-18</span>
+          </div>
+          <p class="mt-2 leading-relaxed">GFM 콜아웃(Alert Box) 가시성 보완</p>
+          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
+            <li>경고, 중요, 정보 등 테마 스타일 및 맞춤 아이콘 지원</li>
+          </ul>
+        </div>
+
+        <!-- v1.1.0 -->
+        <div class="relative">
+          <div class="absolute -left-[31px] top-1.5 bg-slate-400 w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
+          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
+            <span>v1.1.0</span>
+            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-17</span>
+          </div>
+          <p class="mt-2 leading-relaxed">다크 모드(Dark Mode) 지원</p>
+          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
+            <li>테마 전환 시스템 구축 및 실시간 미리보기 호환</li>
+          </ul>
+        </div>
+
+        <!-- v1.0.0 -->
+        <div class="relative">
+          <div class="absolute -left-[31px] top-1.5 bg-slate-400 w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
+          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
+            <span>v1.0.0</span>
+            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-16</span>
+          </div>
+          <p class="mt-2 leading-relaxed">초기 버전 릴리즈</p>
+          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
+            <li>마크다운 실시간 렌더링 에디터 기본 기능 탑재</li>
           </ul>
         </div>
 
