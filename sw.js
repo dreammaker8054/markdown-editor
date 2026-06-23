@@ -1,4 +1,4 @@
-const CACHE_NAME = 'md-editor-cache-v3';
+const CACHE_NAME = 'md-editor-cache-v4';
 const ASSETS = [
   '/markdown-editor/',
   '/markdown-editor/index.html',
