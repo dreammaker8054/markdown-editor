@@ -230,7 +230,39 @@ greet('World');
       ${Ka.innerHTML}
     </body>
     </html>
-  `,t=typeof window.htmlDocx.asBlob==`function`?window.htmlDocx.asBlob(e):window.htmlDocx(e),n=URL.createObjectURL(t),r=document.createElement(`a`);r.href=n,r.download=`document.docx`,r.click(),URL.revokeObjectURL(n)}async function bo(){ho.classList.add(`hidden`);let e=Ka.innerHTML,t=new Blob([e],{type:`text/html`}),n=URL.createObjectURL(t),r=document.createElement(`a`);r.href=n,r.download=`document.html`,r.click(),URL.revokeObjectURL(n)}po&&ho&&(po.addEventListener(`click`,go),ho.querySelectorAll(`button[data-format]`).forEach(e=>{e.addEventListener(`click`,t=>{t.stopPropagation();let n=e.getAttribute(`data-format`);n===`md`||n===`txt`?_o(n):n===`pdf`?vo():n===`docx`?yo():n===`html`&&bo()})}));var xo=document.getElementById(`btn-copy`),So=document.getElementById(`copy-icon`),Co=document.getElementById(`copy-text`);xo&&xo.addEventListener(`click`,async()=>{try{let e=Ga.value;await navigator.clipboard.writeText(e),So.textContent=`check`,Co.textContent=`완료!`,xo.classList.replace(`bg-primary`,`bg-green-600`),xo.classList.replace(`hover:bg-primary-container`,`hover:bg-green-700`),setTimeout(()=>{So.textContent=`content_copy`,Co.textContent=`복사`,xo.classList.replace(`bg-green-600`,`bg-primary`),xo.classList.replace(`hover:bg-green-700`,`hover:bg-primary-container`)},2e3)}catch(e){console.error(`Failed to copy text: `,e),alert(`클립보드 복사에 실패했습니다.`)}}),document.querySelectorAll(`.group`).forEach(e=>{e.addEventListener(`click`,()=>{let t=e.querySelector(`.material-symbols-outlined`).textContent,n=``;switch(t){case`format_bold`:n=`**텍스트**`;break;case`format_italic`:n=`*텍스트*`;break;case`link`:n=`[링크명](url)`;break;case`image`:n=`![이미지 설명](url)`;break;case`format_list_bulleted`:n=`
+  `,t=typeof window.htmlDocx.asBlob==`function`?window.htmlDocx.asBlob(e):window.htmlDocx(e),n=URL.createObjectURL(t),r=document.createElement(`a`);r.href=n,r.download=`document.docx`,r.click(),URL.revokeObjectURL(n)}async function bo(){ho.classList.add(`hidden`);let e=`
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Exported HTML</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 2rem; }
+    h1, h2, h3, h4, h5, h6 { color: #111; margin-top: 1.5em; margin-bottom: 0.5em; font-weight: bold; }
+    h1 { border-bottom: 1px solid #eee; padding-bottom: 0.3em; }
+    h2 { border-bottom: 1px solid #eee; padding-bottom: 0.3em; }
+    p { margin-top: 0; margin-bottom: 1em; }
+    a { color: #0366d6; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul, ol { padding-left: 2em; margin-bottom: 1em; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 1em; }
+    th, td { border: 1px solid #dfe2e5; padding: 6px 13px; }
+    th { background-color: #f6f8fa; font-weight: bold; }
+    tr:nth-child(2n) { background-color: #f6f8fa; }
+    pre, code { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; background-color: #f6f8fa; border-radius: 3px; }
+    code { padding: 0.2em 0.4em; font-size: 85%; }
+    pre { padding: 16px; overflow: auto; font-size: 85%; line-height: 1.45; }
+    pre code { background-color: transparent; padding: 0; }
+    blockquote { border-left: 0.25em solid #dfe2e5; margin: 0 0 1em 0; padding: 0 1em; color: #6a737d; }
+    hr { height: 0.25em; padding: 0; margin: 24px 0; background-color: #e1e4e8; border: 0; }
+    img { max-width: 100%; box-sizing: content-box; }
+  </style>
+</head>
+<body>
+  ${Ka.innerHTML}
+</body>
+</html>
+  `,t=new Blob([e],{type:`text/html`}),n=URL.createObjectURL(t),r=document.createElement(`a`);r.href=n,r.download=`document.html`,r.click(),URL.revokeObjectURL(n)}po&&ho&&(po.addEventListener(`click`,go),ho.querySelectorAll(`button[data-format]`).forEach(e=>{e.addEventListener(`click`,t=>{t.stopPropagation();let n=e.getAttribute(`data-format`);n===`md`||n===`txt`?_o(n):n===`pdf`?vo():n===`docx`?yo():n===`html`&&bo()})}));var xo=document.getElementById(`btn-copy`),So=document.getElementById(`copy-icon`),Co=document.getElementById(`copy-text`);xo&&xo.addEventListener(`click`,async()=>{try{let e=Ga.value;await navigator.clipboard.writeText(e),So.textContent=`check`,Co.textContent=`완료!`,xo.classList.replace(`bg-primary`,`bg-green-600`),xo.classList.replace(`hover:bg-primary-container`,`hover:bg-green-700`),setTimeout(()=>{So.textContent=`content_copy`,Co.textContent=`복사`,xo.classList.replace(`bg-green-600`,`bg-primary`),xo.classList.replace(`hover:bg-green-700`,`hover:bg-primary-container`)},2e3)}catch(e){console.error(`Failed to copy text: `,e),alert(`클립보드 복사에 실패했습니다.`)}}),document.querySelectorAll(`.group`).forEach(e=>{e.addEventListener(`click`,()=>{let t=e.querySelector(`.material-symbols-outlined`).textContent,n=``;switch(t){case`format_bold`:n=`**텍스트**`;break;case`format_italic`:n=`*텍스트*`;break;case`link`:n=`[링크명](url)`;break;case`image`:n=`![이미지 설명](url)`;break;case`format_list_bulleted`:n=`
 * 항목`;break;case`format_list_numbered`:n=`
 1. 항목`;break;case`format_quote`:n=`
 > 인용구`;break;case`table_chart`:typeof Lo==`function`&&Lo(e);return;case`title`:n=`
