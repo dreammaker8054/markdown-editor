@@ -135,7 +135,7 @@
     <meta name="theme-color" content="#003ec7">
     <link rel="apple-touch-icon" href="./icon-192.png">
     <link rel="icon" type="image/png" href="./icon-192.png">
-  <script type="module" crossorigin src="/markdown-editor/assets/main-DpAg9pE5.js"></script>
+  <script type="module" crossorigin src="/markdown-editor/assets/main-D8aIoUD3.js"></script>
   <link rel="stylesheet" crossorigin href="/markdown-editor/assets/main-DDVD8Go0.css">
 </head>
 <body class="bg-background text-on-background dark:bg-slate-950 dark:text-slate-50 font-body-ui h-screen overflow-hidden flex flex-row">
@@ -165,7 +165,7 @@
 </div>
 <button id="btn-changelog" class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold bg-primary/10 text-primary hover:bg-primary hover:text-white rounded-full transition-colors group">
 <span class="material-symbols-outlined text-[16px]">history</span>
-<span class="hidden sm:inline">v2.2.3</span>
+<span class="hidden sm:inline">v2.2.4</span>
 </button>
 <button id="btn-guide" class="text-primary hover:bg-primary-fixed-dim dark:hover:bg-slate-800 px-3 py-1.5 rounded-full text-body-ui font-bold transition-colors flex items-center gap-1 shrink-0" title="마크다운 가이드">
 <span class="material-symbols-outlined text-lg">help</span>
@@ -370,7 +370,7 @@
 <div id="emoji-dropdown" class="hidden fixed w-72 bg-white dark:bg-slate-800 border border-outline-variant dark:border-slate-700 shadow-2xl rounded-2xl p-3 z-50 flex flex-col gap-2 font-body-ui">
   <div class="flex items-center justify-between px-1 border-b border-outline-variant dark:border-slate-700 pb-2">
     <span class="text-xs font-bold text-on-surface dark:text-slate-200">이모지 픽커</span>
-    <span class="text-[10px] text-outline dark:text-slate-400 font-semibold" id="emoji-picker-status">v2.2.3</span>
+    <span class="text-[10px] text-outline dark:text-slate-400 font-semibold" id="emoji-picker-status">v2.2.4</span>
   </div>
   <!-- Search Input -->
   <div class="relative flex items-center">
@@ -452,6 +452,19 @@
     <!-- Body Content -->
     <div class="p-6 overflow-y-auto custom-scrollbar flex-1 space-y-6">
       <div class="relative border-l-2 border-primary-container dark:border-slate-700 pl-6 ml-2 space-y-6 text-sm text-on-surface dark:text-slate-300">
+
+        <!-- v2.2.4 -->
+        <div class="relative">
+          <div class="absolute -left-[31px] top-1.5 bg-primary dark:bg-primary w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
+          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
+            <span>v2.2.4</span>
+            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-23</span>
+          </div>
+          <p class="mt-2 leading-relaxed font-semibold text-primary dark:text-primary-container">HTML 저장 포맷 변경</p>
+          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
+            <li>HTML 파일 저장 시 스타일시트 및 문서 래퍼 없이, 마크다운에서 변환된 순수 HTML 코드만 파일로 추출되도록 동작 수정</li>
+          </ul>
+        </div>
 
         <!-- v2.2.3 -->
         <div class="relative">
