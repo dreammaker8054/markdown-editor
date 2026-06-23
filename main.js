@@ -1672,6 +1672,65 @@ const emojiCategories = [
       { char: '📴', tags: '전원끄기 폰꺼짐 phone off' },
       { char: '🛜', tags: '무선인터넷 와이파이 와이파이기호 wireless wifi' }
     ]
+  },
+  {
+    id: 'characters',
+    name: '문자',
+    icon: '🔠',
+    emojis: [
+      { char: '0️⃣', tags: '숫자 0 영 zero' },
+      { char: '1️⃣', tags: '숫자 1 일 one' },
+      { char: '2️⃣', tags: '숫자 2 이 two' },
+      { char: '3️⃣', tags: '숫자 3 삼 three' },
+      { char: '4️⃣', tags: '숫자 4 사 four' },
+      { char: '5️⃣', tags: '숫자 5 오 five' },
+      { char: '6️⃣', tags: '숫자 6 육 six' },
+      { char: '7️⃣', tags: '숫자 7 칠 seven' },
+      { char: '8️⃣', tags: '숫자 8 팔 eight' },
+      { char: '9️⃣', tags: '숫자 9 구 nine' },
+      { char: '🔟', tags: '숫자 10 십 ten' },
+      { char: '#️⃣', tags: '해시태그 샵 우물정 hashtag' },
+      { char: '*️⃣', tags: '별표 아스테리스크 곱하기 asterisk star' },
+      { char: '🅰️', tags: '에이 알파벳 A 혈액형 blood type' },
+      { char: '🅱️', tags: '비 알파벳 B 혈액형 blood type' },
+      { char: '🆎', tags: '에이비 알파벳 AB 혈액형 blood type' },
+      { char: '🅾️', tags: '오 알파벳 O 혈액형 blood type' },
+      { char: '🆗', tags: '오케이 알았어 확인 ok okay' },
+      { char: '🆕', tags: '뉴 새로운 신규 신상 new fresh' },
+      { char: '🆙', tags: '업 위로 상승 up increase' },
+      { char: '🆒', tags: '쿨 멋진 cool nice' },
+      { char: '🆓', tags: '프리 무료 공짜 free gratis' },
+      { char: 'ℹ️', tags: '정보 인포메이션 안내 information info' },
+      { char: '🆔', tags: '아이디 신분증 id identity' },
+      { char: 'Ⓜ️', tags: '엠 메트로 지하철 m metro' },
+      { char: '🅿️', tags: '피 주차장 파킹 p parking' },
+      { char: '🆘', tags: '에스오에스 구조 긴급 sos help' }
+    ]
+  },
+  {
+    id: 'flags',
+    name: '국기',
+    icon: '🏁',
+    emojis: [
+      { char: '🇰🇷', tags: '한국 대한민국 태극기 국기 south korea kr flag' },
+      { char: '🇺🇸', tags: '미국 성조기 국기 usa us united states flag' },
+      { char: '🇯🇵', tags: '일본 국기 일장기 japan jp flag' },
+      { char: '🇨🇳', tags: '중국 오성홍기 국기 china cn flag' },
+      { char: '🇬🇧', tags: '영국 국기 유니언잭 uk gb united kingdom flag' },
+      { char: '🇫🇷', tags: '프랑스 국기 삼색기 france fr flag' },
+      { char: '🇩🇪', tags: '독일 국기 germany de flag' },
+      { char: '🇮🇹', tags: '이탈리아 국기 italy it flag' },
+      { char: '🇨🇦', tags: '캐나다 국기 단풍잎 canada ca flag' },
+      { char: '🇦🇺', tags: '호주 국기 오스트레일리아 australia au flag' },
+      { char: '🇧🇷', tags: '브라질 국기 brazil br flag' },
+      { char: '🏁', tags: '체크무늬 깃발 레이싱 결승선 마감 check flag finish' },
+      { char: '🚩', tags: '빨간 깃발 삼각형 깃발 목표 red flag triangular' },
+      { char: '🎌', tags: '교차된 깃발 일본 깃발 crossed flags' },
+      { char: '🏴', tags: '검은 깃발 해적 black flag' },
+      { char: '🏳️', tags: '하얀 깃발 항복 백기 white flag surrender' },
+      { char: '🏳️‍🌈', tags: '무지개 깃발 성소수자 평등 프라이드 rainbow flag pride' },
+      { char: '🏴‍☠️', tags: '해적기 해골 마크 깃발 pirate flag skull' }
+    ]
   }
 ];
 
