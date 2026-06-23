@@ -1,6 +1,7 @@
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 import hljs from 'highlight.js';
+import html2pdf from 'html2pdf.js';
 
 const editor = document.getElementById('editor');
 const preview = document.getElementById('preview');
@@ -380,48 +381,141 @@ if (btnOpen) {
   });
 }
 
-if (btnDownload) {
-  btnDownload.addEventListener('click', async () => {
-    const content = editor.value;
-    
-    if (window.showSaveFilePicker) {
-      try {
-        // Show the native file save dialog
-        const handle = await window.showSaveFilePicker({
-          suggestedName: 'document.md',
-          types: [{
-            description: 'Markdown File',
-            accept: {'text/markdown': ['.md', '.txt']},
-          }],
-        });
-        const writable = await handle.createWritable();
-        await writable.write(content);
-        await writable.close();
-      } catch (err) {
-        // Ignore AbortError (user cancelled the dialog)
-        if (err.name !== 'AbortError') {
-          console.error(err);
-          alert('파일 저장 중 오류가 발생했습니다.');
-        }
-      }
-    } else {
-      // Fallback for browsers that don't support showSaveFilePicker
-      let filename = prompt('저장할 파일명을 입력하세요 (확장자 포함)', 'document.md');
-      if (filename) {
-        if (!filename.endsWith('.md') && !filename.endsWith('.txt')) {
-          filename += '.md';
-        }
-        const blob = new Blob([content], { type: 'text/markdown' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        a.click();
-        URL.revokeObjectURL(url);
+const saveDropdown = document.getElementById('save-dropdown');
+
+function toggleSaveDropdown(e) {
+  e.stopPropagation();
+  const rect = btnDownload.getBoundingClientRect();
+  saveDropdown.style.top = `${rect.bottom + 8}px`;
+  saveDropdown.style.left = `${rect.right - 192}px`; // width is 48 (192px)
+  
+  if (saveDropdown.classList.contains('hidden')) {
+    // Close other dropdowns
+    document.getElementById('emoji-dropdown')?.classList.add('hidden');
+    document.getElementById('table-dropdown')?.classList.add('hidden');
+    saveDropdown.classList.remove('hidden');
+  } else {
+    saveDropdown.classList.add('hidden');
+  }
+}
+
+async function saveFileAsText(extension) {
+  saveDropdown.classList.add('hidden');
+  const content = editor.value;
+  
+  if (window.showSaveFilePicker) {
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: `document.${extension}`,
+        types: [{
+          description: 'Document File',
+          accept: {'text/plain': [`.${extension}`]},
+        }],
+      });
+      const writable = await handle.createWritable();
+      await writable.write(content);
+      await writable.close();
+    } catch (err) {
+      if (err.name !== 'AbortError') {
+        console.error(err);
+        alert('파일 저장 중 오류가 발생했습니다.');
       }
     }
+  } else {
+    let filename = prompt('저장할 파일명을 입력하세요 (확장자 포함)', `document.${extension}`);
+    if (filename) {
+      if (!filename.endsWith(`.${extension}`)) {
+        filename += `.${extension}`;
+      }
+      const blob = new Blob([content], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  }
+}
+
+async function saveFileAsPdf() {
+  saveDropdown.classList.add('hidden');
+  const opt = {
+    margin: 10,
+    filename: 'document.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
+  
+  // Clone the preview to avoid modifying the actual DOM
+  const element = preview.cloneNode(true);
+  element.style.padding = '20px';
+  element.style.color = '#000'; // Force dark text for PDF if in dark mode
+  element.style.backgroundColor = '#fff';
+  
+  html2pdf().set(opt).from(element).save();
+}
+
+async function saveFileAsDocx() {
+  saveDropdown.classList.add('hidden');
+  const content = preview.innerHTML;
+  
+  // Wrap content in basic HTML structure for html-docx-js
+  const htmlContent = `
+    <!DOCTYPE html>
+    <html lang="ko">
+    <head>
+      <meta charset="UTF-8">
+      <style>
+        body { font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; color: #333; }
+        h1, h2, h3, h4, h5, h6 { color: #000; margin-top: 24px; margin-bottom: 16px; font-weight: bold; }
+        p { margin-top: 0; margin-bottom: 16px; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 16px; }
+        th, td { border: 1px solid #ccc; padding: 8px; }
+        th { background-color: #f2f2f2; font-weight: bold; }
+        pre, code { background-color: #f5f5f5; font-family: monospace; padding: 2px 4px; border-radius: 4px; }
+        pre { padding: 16px; overflow: auto; }
+        pre code { background-color: transparent; padding: 0; }
+        blockquote { border-left: 4px solid #ccc; margin-left: 0; padding-left: 16px; color: #666; }
+      </style>
+    </head>
+    <body>
+      ${content}
+    </body>
+    </html>
+  `;
+  
+  // Use window.htmlDocx since we loaded it via CDN
+  const converted = typeof window.htmlDocx.asBlob === 'function' ? window.htmlDocx.asBlob(htmlContent) : window.htmlDocx(htmlContent);
+  
+  const url = URL.createObjectURL(converted);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'document.docx';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+if (btnDownload && saveDropdown) {
+  btnDownload.addEventListener('click', toggleSaveDropdown);
+  
+  const options = saveDropdown.querySelectorAll('button[data-format]');
+  options.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const format = btn.getAttribute('data-format');
+      if (format === 'md' || format === 'txt') {
+        saveFileAsText(format);
+      } else if (format === 'pdf') {
+        saveFileAsPdf();
+      } else if (format === 'docx') {
+        saveFileAsDocx();
+      }
+    });
   });
 }
+
 
 const btnCopy = document.getElementById('btn-copy');
 const copyIcon = document.getElementById('copy-icon');
