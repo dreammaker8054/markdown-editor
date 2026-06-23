@@ -324,6 +324,7 @@ editor.addEventListener('scroll', () => {
 
 // File operations
 const btnNew = document.getElementById('btn-new');
+const btnReset = document.getElementById('btn-reset');
 const btnOpen = document.getElementById('btn-open');
 const btnDownload = document.getElementById('btn-download');
 const btnGuide = document.getElementById('btn-guide');
@@ -339,7 +340,18 @@ if (btnNew) {
     if (editor.value.trim() === '' || confirm('작성 중인 내용이 지워집니다. 새 문서를 시작하시겠습니까?')) {
       editor.value = '';
       updatePreview();
+      if (historyManager) historyManager.push();
       setMode('edit');
+    }
+  });
+}
+
+if (btnReset) {
+  btnReset.addEventListener('click', () => {
+    if (confirm('모든 내용이 초기 디폴트 템플릿으로 되돌아갑니다. 계속하시겠습니까?')) {
+      editor.value = defaultContent;
+      updatePreview();
+      if (historyManager) historyManager.push();
     }
   });
 }
@@ -357,6 +369,7 @@ if (btnOpen) {
     reader.onload = (e) => {
       editor.value = e.target.result;
       updatePreview();
+      if (historyManager) historyManager.push();
       fileInput.value = ''; // reset so same file can be loaded again
     };
     reader.readAsText(file);
