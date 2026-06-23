@@ -134,7 +134,7 @@
     <meta name="theme-color" content="#003ec7">
     <link rel="apple-touch-icon" href="./icon-192.png">
     <link rel="icon" type="image/png" href="./icon-192.png">
-  <script type="module" crossorigin src="/markdown-editor/assets/main-DmYCdRZ9.js"></script>
+  <script type="module" crossorigin src="/markdown-editor/assets/main-BZflzmws.js"></script>
   <link rel="stylesheet" crossorigin href="/markdown-editor/assets/main-DDVD8Go0.css">
 </head>
 <body class="bg-background text-on-background dark:bg-slate-950 dark:text-slate-50 font-body-ui h-screen overflow-hidden flex flex-row">
@@ -346,7 +346,7 @@
   </button>
   
   <div class="px-4 py-1 mt-2 text-xs font-bold text-outline dark:text-slate-400 uppercase tracking-wider">고급 블록</div>
-  <button class="slash-item text-left px-4 py-2 hover:bg-surface-container-low focus:bg-surface-container-low dark:hover:bg-slate-700 dark:focus:bg-slate-700 outline-none flex items-center gap-3 transition-colors" data-insert="\n\n| 제목 1 | 제목 2 |\n| --- | --- |\n| 내용 | 내용 |\n">
+  <button class="slash-item text-left px-4 py-2 hover:bg-surface-container-low focus:bg-surface-container-low dark:hover:bg-slate-700 dark:focus:bg-slate-700 outline-none flex items-center gap-3 transition-colors" data-command="table_chart">
     <span class="material-symbols-outlined text-outline dark:text-slate-400">table_chart</span>
     <div class="flex flex-col"><span class="text-on-surface dark:text-slate-100 font-semibold text-sm">표</span><span class="text-xs text-outline dark:text-slate-400">데이터 표 삽입</span></div>
   </button>
@@ -384,6 +384,22 @@
   <div id="emoji-grid" class="grid grid-cols-8 gap-1 max-h-44 overflow-y-auto custom-scrollbar pr-0.5">
     <!-- Will be dynamically populated by JS -->
   </div>
+</div>
+
+<!-- Table Insert Dropdown -->
+<div id="table-dropdown" class="hidden fixed w-52 bg-white dark:bg-slate-800 border border-outline-variant dark:border-slate-700 shadow-xl rounded-xl p-3 z-50 flex flex-col gap-3">
+  <div class="text-xs font-bold text-on-surface dark:text-slate-200">표 삽입 설정</div>
+  <div class="flex items-center justify-between gap-2">
+    <label for="table-cols" class="text-xs text-on-surface-variant dark:text-slate-400">가로 (열)</label>
+    <input type="number" id="table-cols" value="2" min="1" max="20" class="w-16 text-xs px-2 py-1 border border-outline-variant dark:border-slate-700 rounded bg-surface-container-low dark:bg-slate-900 focus:outline-none focus:ring-1 focus:ring-primary dark:text-slate-100 text-center" />
+  </div>
+  <div class="flex items-center justify-between gap-2">
+    <label for="table-rows" class="text-xs text-on-surface-variant dark:text-slate-400">세로 (행)</label>
+    <input type="number" id="table-rows" value="2" min="1" max="50" class="w-16 text-xs px-2 py-1 border border-outline-variant dark:border-slate-700 rounded bg-surface-container-low dark:bg-slate-900 focus:outline-none focus:ring-1 focus:ring-primary dark:text-slate-100 text-center" />
+  </div>
+  <button type="button" id="btn-apply-table" class="w-full bg-primary text-white text-xs font-bold py-1.5 rounded-lg hover:opacity-90 transition-opacity">
+    반영
+  </button>
 </div>
 
 </main>
@@ -564,15 +580,29 @@
 
         <!-- v2.1.0 -->
         <div class="relative">
-          <div class="absolute -left-[31px] top-1.5 bg-primary dark:bg-primary w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
+          <div class="absolute -left-[31px] top-1.5 bg-slate-400 w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
           <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
             <span>v2.1.0</span>
             <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-23</span>
           </div>
-          <p class="mt-2 leading-relaxed font-semibold text-primary dark:text-primary-container">표현 가능한 대규모 이모지 세트 탑재</p>
-          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs">
+          <p class="mt-2 leading-relaxed">표현 가능한 대규모 이모지 세트 탑재</p>
+          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
             <li>약 600여 종에 달하는 풍부한 표준 상용 이모지 목록 추가</li>
             <li>카테고리 탭 구성을 최적화하여 방대한 데이터의 스크롤 탐색 성능 개선</li>
+          </ul>
+        </div>
+
+        <!-- v2.1.1 -->
+        <div class="relative">
+          <div class="absolute -left-[31px] top-1.5 bg-primary dark:bg-primary w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
+          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
+            <span>v2.1.1</span>
+            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-23</span>
+          </div>
+          <p class="mt-2 leading-relaxed font-semibold text-primary dark:text-primary-container">이모지 픽커 탭 전환 버그 수정</p>
+          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs">
+            <li>다른 이모지 탭으로 이동 시 메뉴가 의도치 않게 닫히는 현상(Detached Node 오류) 해결</li>
+            <li>팝업 및 드롭다운의 외부 클릭(Click Outside) 이벤트 안전성 강화</li>
           </ul>
         </div>
 
