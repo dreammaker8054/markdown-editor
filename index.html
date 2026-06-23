@@ -161,9 +161,9 @@
 <button id="btn-split" class="px-3 py-1 text-sm font-medium text-outline hover:text-on-surface transition-colors shrink-0">스플릿</button>
 <button id="btn-preview" class="px-3 py-1 text-sm font-medium text-outline hover:text-on-surface transition-colors shrink-0">미리보기</button>
 </div>
-<button id="btn-changelog" class="text-on-surface-variant dark:text-slate-300 hover:bg-surface-container-low dark:hover:bg-slate-800 px-3 py-1.5 rounded-full text-body-ui font-bold transition-colors flex items-center gap-1 shrink-0" title="업데이트 일지">
-<span class="material-symbols-outlined text-lg">history</span>
-<span class="hidden sm:inline">v2.1.0</span>
+<button id="btn-changelog" class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold bg-primary/10 text-primary hover:bg-primary hover:text-white rounded-full transition-colors group">
+<span class="material-symbols-outlined text-[16px]">history</span>
+<span class="hidden sm:inline">v2.2.0</span>
 </button>
 <button id="btn-guide" class="text-primary hover:bg-primary-fixed-dim dark:hover:bg-slate-800 px-3 py-1.5 rounded-full text-body-ui font-bold transition-colors flex items-center gap-1 shrink-0" title="마크다운 가이드">
 <span class="material-symbols-outlined text-lg">help</span>
@@ -366,9 +366,9 @@
 </div>
 
 <div id="emoji-dropdown" class="hidden fixed w-72 bg-white dark:bg-slate-800 border border-outline-variant dark:border-slate-700 shadow-2xl rounded-2xl p-3 z-50 flex flex-col gap-2 font-body-ui">
-  <div class="flex items-center justify-between border-b border-outline-variant dark:border-slate-700 pb-1.5">
+  <div class="flex items-center justify-between px-1 border-b border-outline-variant dark:border-slate-700 pb-2">
     <span class="text-xs font-bold text-on-surface dark:text-slate-200">이모지 픽커</span>
-    <span class="text-[10px] text-outline dark:text-slate-400 font-semibold" id="emoji-picker-status">v2.1.0</span>
+    <span class="text-[10px] text-outline dark:text-slate-400 font-semibold" id="emoji-picker-status">v2.2.0</span>
   </div>
   <!-- Search Input -->
   <div class="relative flex items-center">
@@ -588,6 +588,20 @@
           <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs text-outline dark:text-slate-400">
             <li>약 600여 종에 달하는 풍부한 표준 상용 이모지 목록 추가</li>
             <li>카테고리 탭 구성을 최적화하여 방대한 데이터의 스크롤 탐색 성능 개선</li>
+          </ul>
+        </div>
+
+        <!-- v2.2.0 -->
+        <div class="relative">
+          <div class="absolute -left-[31px] top-1.5 bg-primary dark:bg-primary w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-slate-900"></div>
+          <div class="font-bold text-base text-on-surface dark:text-slate-100 flex items-center gap-2">
+            <span>v2.2.0</span>
+            <span class="text-xs font-normal text-outline dark:text-slate-400">2026-06-23</span>
+          </div>
+          <p class="mt-2 leading-relaxed font-semibold text-primary dark:text-primary-container">동적 표 생성기 추가</p>
+          <ul class="mt-1 list-disc list-inside space-y-1 pl-1 text-xs">
+            <li>표 아이콘 및 슬래시 메뉴(/표) 사용 시 가로/세로 지정 가능한 팝업창 추가</li>
+            <li>입력한 크기 및 조건에 맞춰 마크다운 테이블 자동 삽입되도록 기능 개선</li>
           </ul>
         </div>
 
